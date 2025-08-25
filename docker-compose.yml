@@ -1,0 +1,13 @@
+# docker-compose up -d --build
+
+services:
+  violetjs-app:
+    container_name: violetjs-app
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./docker-volumes/runtime:/app/runtime
+    env_file: .env
+    # command: tail -f /dev/null
