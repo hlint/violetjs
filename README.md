@@ -10,13 +10,19 @@ A full-stack ReactJS development framework powered by Vite, featuring SSR and SS
 bun ci
 ```
 
-### 2. Start the development server
+### 2. Some Configurations
+
+```bash
+cp .env.example .env
+```
+
+### 3. Start the development server
 
 ```bash
 bun dev
 ```
 
-### 3. Build the application
+### 4. Build the application
 
 ```bash
 bun run build
@@ -24,12 +30,61 @@ bun run build
 
 ## Why VioletJS?
 
-- **The Motivation**: I love Next.js's functionality, but its black-box nature, complex concepts, and tight Vercel integration were frustrating. So I built VioletJS - a comprehensive framework that's lightweight, transparent, and fully controllable.
+### The Motivation
 
-- **Simple(?) & Transparent**: No hidden magic or confusing conventions. Like shadcn-ui, everything is open source and customizable.
+I love `Next.js`'s functionality, but its black-box nature, complex concepts, and tight Vercel integration were frustrating. So I built VioletJS - a comprehensive framework that's lightweight, transparent, and fully controllable.
 
-- **Straightforward SSR**: Prepare `ssrData` → pass to React component. That's it.
+### Simple(?) & Transparent
 
-- **Flexible SSG**: Generate static pages when needed, update cache manually.
+No hidden magic or confusing conventions like `shadcn-ui`. Everything is built with vite and express, you can easily customize it.
 
-- **SPA-Friendly**: Use browser router and state management (Zustand, etc.) like any React app. Just handle missing `ssrData`.
+### Straightforward SSR
+
+Prepare `ssrData` → pass to React component. That's it.
+
+```js
+export default async function ssrLoader(url, context) {
+  const ssrData = {};
+  const user = context.user;
+  ssrData.user = user;
+  if (url === "/post/list") {
+    const list = await getPostList();
+    ssrData.postList = list;
+  }
+  return ssrData;
+}
+```
+
+### Flexible SSG
+
+Generate static pages when needed, update cache manually.
+
+```js
+export const function getPostList() {
+	// ...
+}
+
+export const function updatePost(id, title, content) {
+	// ...
+  ssgUpdate(["/post/list"]);
+}
+
+```
+
+### SPA-Friendly
+
+Use browser router and state management (Zustand, etc.) like any React app. Just handle missing `ssrData`.
+
+```jsx
+import { useEffect } from "react";
+
+export default function MyApp() {
+  const [postList, setPostList] = useState(getSsrData?.postList || []);
+
+  useEffect(() => {
+    getPostList().then(setPostList);
+  }, []);
+
+  return <PostListComponent postList={postList} />;
+}
+```
