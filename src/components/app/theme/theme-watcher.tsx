@@ -13,6 +13,9 @@ export function ThemeWatcher() {
     if (!isInitialized) {
       return;
     }
+    if (colorMode === "system") {
+      setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
     const handleChange = (e: MediaQueryListEvent) => {
       if (colorMode === "system") {
         setIsDark(e.matches);
