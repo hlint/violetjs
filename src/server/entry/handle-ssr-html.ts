@@ -1,7 +1,6 @@
 import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
-import type { OsContext } from "../../lib/orpc-client.ts";
-import type { Session } from "../../lib/type";
-import ssrLoader from "../ssr-loader.ts";
+import type { Session, ThemeColorMode, ThemePalette } from "../../lib/types.ts";
+import ssrLoader, { type SsrLoaderContext } from "../ssr-loader.ts";
 import { renderHtml } from "./render-html.ts";
 
 type CompiledServerRender = typeof import("@/entry-server.tsx").render;
@@ -24,7 +23,10 @@ export async function handleSsrHtml({
 }) {
   const context = {
     session: resLocals.session as Session,
-  } satisfies OsContext;
+    themeColorMode: (resLocals.themeColorMode || "system") as ThemeColorMode,
+    themeIsDark: resLocals.themeIsDark === "true",
+    themePalette: (resLocals.themePalette || "default") as ThemePalette,
+  } satisfies SsrLoaderContext;
   const ssrData = await ssrLoader(url, context);
   const helmetContext: HelmetDataContext = {};
   const rendered = render(url, ssrData, helmetContext);

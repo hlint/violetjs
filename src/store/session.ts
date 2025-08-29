@@ -1,7 +1,7 @@
 import type { StateCreator } from "zustand";
 import { orpc } from "@/lib/orpc-client";
 import { getSsrData } from "@/lib/ssr-data";
-import type { Session } from "@/lib/type";
+import type { Session } from "@/lib/types";
 import type { RootStoreState } from "./_root";
 
 export type SessionSlice = {

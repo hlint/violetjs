@@ -2,7 +2,7 @@ import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { os, type RouterClient } from "@orpc/server";
 import type { OrpcRouter } from "@/server/orpc-router";
-import type { Session } from "./type";
+import type { Session } from "./types";
 
 const link = new RPCLink({
   url: () => {
@@ -38,5 +38,5 @@ export const middlewareLoggedInRequired = osBase.middleware(
       throw errors.UNAUTHORIZED();
     }
     return next();
-  },
+  }
 );
