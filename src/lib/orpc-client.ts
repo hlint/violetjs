@@ -38,5 +38,5 @@ export const middlewareLoggedInRequired = osBase.middleware(
       throw errors.UNAUTHORIZED();
     }
     return next();
-  }
+  },
 );

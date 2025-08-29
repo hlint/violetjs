@@ -79,12 +79,14 @@ Use browser router and state management (Zustand, etc.) like any React app. Just
 import { useEffect } from "react";
 
 export default function MyApp() {
-  const [postList, setPostList] = useState(getSsrData?.postList || []);
+  const [postList, setPostList] = useState(getSsrData()?.postList);
 
   useEffect(() => {
-    getPostList().then(setPostList);
-  }, []);
+    if (!postList) {
+      getPostList().then(setPostList);
+    }
+  }, [postList]);
 
-  return <PostListComponent postList={postList} />;
+  return <PostListComponent postList={postList || []} />;
 }
 ```

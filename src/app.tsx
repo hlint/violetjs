@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router";
 import { Toaster } from "sonner";
 import ErrorFallback from "./components/app/error-fallback";
 import ErrorNotifier from "./components/app/error-notifier";
-import { ThemeProvider } from "./components/app/theme/theme-provider";
+import { ThemeWatcher } from "./components/app/theme/theme-watcher";
 import AppLayout from "./layouts/app-layout";
 import AuthLayout from "./layouts/auth-layout";
 import RootLayout from "./layouts/root-layout";
@@ -31,35 +31,34 @@ export default function App({
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <HelmetProvider context={helmetContext}>
-        <ThemeProvider>
-          <Toaster />
-          <ErrorNotifier />
-          <RootStoreProvider>
-            <Routes>
-              <Route path="*" element={<RootLayout />}>
-                <Route path="auth" element={<AuthLayout />}>
-                  <Route path="sign-in" element={<SignInPage />} />
-                  <Route path="sign-out" element={<SignOutPage />} />
-                </Route>
-                <Route path="*" element={<AppLayout />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="about" element={<AboutPage />} />
-                  <Route path="demo">
-                    <Route path="todo" element={<TodoPage />} />
-                    <Route path="auth-required" element={<SignInGuard />}>
-                      <Route index element={<AuthRequiredPage />} />
-                    </Route>
-                    <Route
-                      path="error-handling"
-                      element={<ErrorHandlingPage />}
-                    />
-                  </Route>
-                  <Route path="*" element={<NotFoundPage />} />
-                </Route>
+        <Toaster />
+        <ErrorNotifier />
+        <RootStoreProvider>
+          <ThemeWatcher />
+          <Routes>
+            <Route path="*" element={<RootLayout />}>
+              <Route path="auth" element={<AuthLayout />}>
+                <Route path="sign-in" element={<SignInPage />} />
+                <Route path="sign-out" element={<SignOutPage />} />
               </Route>
-            </Routes>
-          </RootStoreProvider>
-        </ThemeProvider>
+              <Route path="*" element={<AppLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="demo">
+                  <Route path="todo" element={<TodoPage />} />
+                  <Route path="auth-required" element={<SignInGuard />}>
+                    <Route index element={<AuthRequiredPage />} />
+                  </Route>
+                  <Route
+                    path="error-handling"
+                    element={<ErrorHandlingPage />}
+                  />
+                </Route>
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Route>
+          </Routes>
+        </RootStoreProvider>
       </HelmetProvider>
     </ErrorBoundary>
   );

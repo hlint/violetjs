@@ -1,10 +1,7 @@
 import type { DemoTodo } from "@/db/schema";
-import type { Session, ThemeColorMode, ThemePalette } from "./types";
+import type { Session } from "./types";
 
 export type SsrData = {
-  themeColorMode: ThemeColorMode;
-  themeIsDark: boolean;
-  themePalette: ThemePalette;
   session: Session;
   demo_todos: DemoTodo[];
 };

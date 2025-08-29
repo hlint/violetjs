@@ -3,12 +3,7 @@ import { RPCHandler } from "@orpc/server/node";
 import cookieParser from "cookie-parser";
 import express from "express";
 import type { OsContext } from "../../lib/orpc-client.ts";
-import {
-  type Session,
-  storageKeyColorMode,
-  storageKeyIsDark,
-  storageKeyPalette,
-} from "../../lib/types.ts";
+import type { Session } from "../../lib/types.ts";
 import { authConfig } from "../auth.ts";
 import { orpcRouter } from "../orpc-router.ts";
 
@@ -69,10 +64,8 @@ export default function handleApp(app: express.Express) {
   app.use(cookieParser());
 
   // handle cookies
-  app.use(async (req, res, next) => {
-    res.locals.themeColorMode = req.cookies[storageKeyColorMode];
-    res.locals.themeIsDark = req.cookies[storageKeyIsDark];
-    res.locals.themePalette = req.cookies[storageKeyPalette];
+  app.use(async (_req, _res, next) => {
+    // res.locals.themeColorMode = req.cookies[storageKeyColorMode];
     return next();
   });
 }

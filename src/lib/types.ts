@@ -14,9 +14,3 @@ export type Session = {
   email: string;
   image: string;
 };
-
-export const storageKeyColorMode = "violet-ui-color-mode";
-export const storageKeyIsDark = "violet-ui-is-dark";
-export const storageKeyPalette = "violet-ui-palette";
-export type ThemeColorMode = "dark" | "light" | "system";
-export type ThemePalette = string;

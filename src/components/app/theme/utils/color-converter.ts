@@ -10,14 +10,14 @@ export const formatNumber = (num?: number) => {
 
 export const formatHsl = (hsl: Hsl) => {
   return `hsl(${formatNumber(hsl.h)} ${formatNumber(
-    hsl.s * 100
+    hsl.s * 100,
   )}% ${formatNumber(hsl.l * 100)}%)`;
 };
 
 export const colorFormatter = (
   colorValue: string,
   format: ColorFormat = "hsl",
-  tailwindVersion: "3" | "4" = "3"
+  tailwindVersion: "3" | "4" = "3",
 ): string => {
   try {
     const color = culori.parse(colorValue);
@@ -30,7 +30,7 @@ export const colorFormatter = (
           return formatHsl(hsl);
         }
         return `${formatNumber(hsl.h)} ${formatNumber(
-          hsl.s * 100
+          hsl.s * 100,
         )}% ${formatNumber(hsl.l * 100)}%`;
       }
       case "rgb":
@@ -38,7 +38,7 @@ export const colorFormatter = (
       case "oklch": {
         const oklch = culori.converter("oklch")(color);
         return `oklch(${formatNumber(oklch.l)} ${formatNumber(
-          oklch.c
+          oklch.c,
         )} ${formatNumber(oklch.h)})`;
       }
       case "hex":

@@ -1,11 +1,11 @@
 import { createContext, useContext, useRef } from "react";
 import { createStore, useStore } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { createDemoMemoSlice, type DemoMemoSlice } from "./demo-memo";
 import { createDemoTodoSlice, type DemoTodoSlice } from "./demo-todo";
 import { createSessionSlice, type SessionSlice } from "./session";
+import { createThemeSlice, type ThemeSlice } from "./theme";
 
-export type RootStoreState = DemoMemoSlice & DemoTodoSlice & SessionSlice;
+export type RootStoreState = DemoTodoSlice & SessionSlice & ThemeSlice;
 
 type RootStoreInstance = ReturnType<typeof createRootStore>;
 
@@ -13,9 +13,9 @@ function createRootStore() {
   const store = createStore<RootStoreState>()(
     immer((...a) => ({
       ...createSessionSlice(...a),
-      ...createDemoMemoSlice(...a),
+      ...createThemeSlice(...a),
       ...createDemoTodoSlice(...a),
-    })),
+    }))
   );
   return store;
 }
@@ -31,26 +31,32 @@ export function RootStoreProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Root Store Hook
 export function useRootStore<T>(selector: (state: RootStoreState) => T): T {
   const store = useContext(RootStoreContext);
   if (!store) throw new Error("Missing RootStoreContext.Provider in the tree");
   return useStore(store, selector);
 }
 
-export function useDemoTodoStore<T>(
-  selector: (state: DemoTodoSlice["demoTodo"]) => T,
-): T {
-  return useRootStore((s) => selector(s.demoTodo));
-}
+// Slice Hooks
+export const useDemoTodoStore = creatorSliceHook((s) => s.demoTodo);
+export const useSessionStore = creatorSliceHook((s) => s.session);
+export const useThemeStore = creatorSliceHook((s) => s.theme);
 
-export function useDemoMemoStore<T>(
-  selector: (state: DemoMemoSlice["demoMemo"]) => T,
-): T {
-  return useRootStore((s) => selector(s.demoMemo));
-}
-
-export function useSessionStore<T>(
-  selector: (state: SessionSlice["session"]) => T,
-): T {
-  return useRootStore((s) => selector(s.session));
+function creatorSliceHook<Slice>(
+  sliceSelector: (state: RootStoreState) => Slice
+) {
+  const useSliceStore: {
+    (): Slice;
+    <T>(selector?: (sliceState: Slice) => T): T;
+  } = <T,>(selector?: (sliceState: Slice) => T): T | Slice => {
+    return useRootStore((s) => {
+      const slice = sliceSelector(s);
+      if (!selector) {
+        return slice;
+      }
+      return selector(slice);
+    });
+  };
+  return useSliceStore;
 }

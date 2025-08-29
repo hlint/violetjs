@@ -1,5 +1,5 @@
 import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
-import type { Session, ThemeColorMode, ThemePalette } from "../../lib/types.ts";
+import type { Session } from "../../lib/types.ts";
 import ssrLoader, { type SsrLoaderContext } from "../ssr-loader.ts";
 import { renderHtml } from "./render-html.ts";
 
@@ -23,9 +23,6 @@ export async function handleSsrHtml({
 }) {
   const context = {
     session: resLocals.session as Session,
-    themeColorMode: (resLocals.themeColorMode || "system") as ThemeColorMode,
-    themeIsDark: resLocals.themeIsDark === "true",
-    themePalette: (resLocals.themePalette || "default") as ThemePalette,
   } satisfies SsrLoaderContext;
   const ssrData = await ssrLoader(url, context);
   const helmetContext: HelmetDataContext = {};
