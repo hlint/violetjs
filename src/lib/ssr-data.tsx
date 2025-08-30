@@ -2,12 +2,14 @@ import type { DemoTodo } from "@/db/schema";
 import type { Session } from "./types";
 
 export type SsrData = {
-  session: Session;
-  demo_todos: DemoTodo[];
+  swrFallback: {
+    todos?: DemoTodo[];
+    session: Session;
+  };
 };
 
 export const refSsrData = {
-  current: {} as Partial<SsrData> | undefined,
+  current: {} as SsrData | undefined,
 };
 
 export function getSsrData() {

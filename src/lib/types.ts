@@ -4,7 +4,7 @@ import "@total-typescript/ts-reset/dom";
 
 declare global {
   interface Window {
-    __SSR_DATA__?: Partial<SsrData>;
+    __SSR_DATA__?: SsrData;
   }
 }
 

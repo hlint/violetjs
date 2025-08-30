@@ -20,8 +20,7 @@
     "dev": "bun --hot src/server/entry/entry-dev.ts",
     "lint": "biome check --write .",
     "lint:fix": "biome check --write --unsafe .",
-    "preview": "cd dist && bun main.js",
-    "preview:standalone": "cd dist && ./main",
+    "preview": "bun run build && cp .env dist/.env && cp -r runtime dist/runtime && cd dist && bun main.js",
     "sort": "sort-package-json",
     "tsc": "tsc"
   },

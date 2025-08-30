@@ -19,7 +19,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { useSessionStore } from "@/store/_root";
+import { useSession } from "@/hooks/use-session";
 
 export default function AppLayout() {
   return (
@@ -82,8 +82,8 @@ function NavMenu() {
 }
 
 function UserMenu() {
-  const session = useSessionStore();
-  if (!session.initialize) {
+  const session = useSession();
+  if (!session) {
     return null;
   }
   return session.loggedIn ? (

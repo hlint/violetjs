@@ -1,5 +1,5 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useThemeStore } from "@/store/_root";
 import { getPaletteStyles } from "./utils/get-palette-styles";
 
@@ -30,6 +30,11 @@ export function ThemeWatcher() {
         .removeEventListener("change", handleChange);
     };
   }, [isInitialized, colorMode, setIsDark]);
+  useEffect(() => {
+    if (isInitialized) {
+      window.document.body.style.opacity = "1";
+    }
+  }, [isInitialized]);
 
   return (
     <Helmet>

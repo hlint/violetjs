@@ -1,13 +1,12 @@
 import { Outlet } from "react-router";
-import { useRootStore } from "@/store/_root";
+import { useSession } from "@/hooks/use-session";
 
 export default function SignInGuard() {
-  const initialize = useRootStore((s) => s.session.initialize);
-  const loggedIn = useRootStore((s) => s.session.loggedIn);
-  if (!initialize) {
+  const session = useSession();
+  if (!session) {
     return null;
   }
-  if (!loggedIn) {
+  if (!session.loggedIn) {
     return <div>Sign In Required</div>;
   }
   return <Outlet />;

@@ -10,13 +10,12 @@ export type SsrLoaderContext = {
 export default async function ssrLoader(
   url: string,
   context: SsrLoaderContext,
-): Promise<Partial<SsrData>> {
+): Promise<SsrData> {
   const osOptions = { context };
-  const ssrData = {} as Partial<SsrData>;
-  ssrData.session = context.session;
+  const ssrData: SsrData = { swrFallback: { session: context.session } };
   const urlObj = new URL(url, "http://localhost");
   if (urlObj.pathname === "/demo/todo") {
-    ssrData.demo_todos = await call(getTodos, null, osOptions).catch(
+    ssrData.swrFallback.todos = await call(getTodos, null, osOptions).catch(
       () => undefined,
     );
   }

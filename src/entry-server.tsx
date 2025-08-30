@@ -7,7 +7,7 @@ import { refSsrData, type SsrData } from "./lib/ssr-data";
 
 export function render(
   url: string,
-  ssrData?: Partial<SsrData>,
+  ssrData?: SsrData,
   helmetContext?: HelmetDataContext,
 ) {
   refSsrData.current = ssrData;

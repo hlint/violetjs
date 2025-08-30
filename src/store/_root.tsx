@@ -1,21 +1,17 @@
 import { createContext, useContext, useRef } from "react";
 import { createStore, useStore } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { createDemoTodoSlice, type DemoTodoSlice } from "./demo-todo";
-import { createSessionSlice, type SessionSlice } from "./session";
 import { createThemeSlice, type ThemeSlice } from "./theme";
 
-export type RootStoreState = DemoTodoSlice & SessionSlice & ThemeSlice;
+export type RootStoreState = ThemeSlice;
 
 type RootStoreInstance = ReturnType<typeof createRootStore>;
 
 function createRootStore() {
   const store = createStore<RootStoreState>()(
     immer((...a) => ({
-      ...createSessionSlice(...a),
       ...createThemeSlice(...a),
-      ...createDemoTodoSlice(...a),
-    }))
+    })),
   );
   return store;
 }
@@ -39,12 +35,10 @@ export function useRootStore<T>(selector: (state: RootStoreState) => T): T {
 }
 
 // Slice Hooks
-export const useDemoTodoStore = creatorSliceHook((s) => s.demoTodo);
-export const useSessionStore = creatorSliceHook((s) => s.session);
 export const useThemeStore = creatorSliceHook((s) => s.theme);
 
 function creatorSliceHook<Slice>(
-  sliceSelector: (state: RootStoreState) => Slice
+  sliceSelector: (state: RootStoreState) => Slice,
 ) {
   const useSliceStore: {
     (): Slice;
