@@ -159,3 +159,10 @@
     background: var(--color-sidebar-ring);
   }
 }
+
+/* biome-ignore lint/style/noUnknownSelector: View Transitions API pseudo-elements */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

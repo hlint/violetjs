@@ -37,19 +37,19 @@ export default function TodoPage() {
         await orpc.demo.todo.removeTodo({ id });
         return optimisticData;
       },
-      { optimisticData },
+      { optimisticData, revalidate: false }
     );
   };
   const handleToggleCompleted = (id: number) => {
     const optimisticData = todos.map((t) =>
-      t.id === id ? { ...t, completed: !t.completed } : t,
+      t.id === id ? { ...t, completed: !t.completed } : t
     );
     mutate(
       async () => {
         await orpc.demo.todo.toggleCompleted({ id });
         return optimisticData;
       },
-      { optimisticData },
+      { optimisticData, revalidate: false }
     );
   };
   return (
@@ -86,7 +86,7 @@ export default function TodoPage() {
                 type="button"
                 className={cn(
                   "cursor-pointer",
-                  todo.completed && "line-through",
+                  todo.completed && "line-through"
                 )}
                 onClick={() => handleToggleCompleted(todo.id)}
               >
@@ -116,7 +116,11 @@ function FormAddTodo({ todos }: { todos: DemoTodo[] }) {
   const handleAddTodo = (title: string) => {
     const optimisticData = [
       ...todos,
-      { id: Math.max(...todos.map((t) => t.id)) + 1, title, completed: false },
+      {
+        id: Math.max(...todos.map((t) => t.id)) + 1,
+        title: `* ${title}`,
+        completed: false,
+      },
     ];
     mutate(
       "todos",
@@ -126,7 +130,7 @@ function FormAddTodo({ todos }: { todos: DemoTodo[] }) {
       },
       {
         optimisticData,
-      },
+      }
     );
   };
   return (

@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 import { SWRConfig } from "swr";
 import ErrorFallback from "./components/app/error-fallback";
 import ErrorNotifier from "./components/app/error-notifier";
-import { ThemeWatcher } from "./components/app/theme/theme-watcher";
+import { ThemeEffects } from "./components/app/theme/theme-effects";
 import { SessionProvider } from "./hooks/use-session";
 import AppLayout from "./layouts/app-layout";
 import AuthLayout from "./layouts/auth-layout";
@@ -43,7 +43,7 @@ export default function App({
         <RootStoreProvider>
           <SessionProvider>
             <HelmetProvider context={helmetContext}>
-              <ThemeWatcher />
+              <ThemeEffects />
               <Routes>
                 <Route path="*" element={<RootLayout />}>
                   <Route path="auth" element={<AuthLayout />}>

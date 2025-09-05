@@ -1,10 +1,10 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useThemeStore } from "@/store/_root";
 import { getPaletteStyles } from "./utils/get-palette-styles";
 
-export function ThemeWatcher() {
-  const { isInitialized, palette, colorMode, setIsDark, initialize } =
+export function ThemeEffects() {
+  const { isInitialized, palette, colorMode, isDark, setIsDark, initialize } =
     useThemeStore();
   useLayoutEffect(() => {
     initialize();
@@ -30,11 +30,16 @@ export function ThemeWatcher() {
         .removeEventListener("change", handleChange);
     };
   }, [isInitialized, colorMode, setIsDark]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isInitialized) {
       window.document.body.style.opacity = "1";
     }
   }, [isInitialized]);
+  useLayoutEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(isDark ? "dark" : "light");
+  }, [isDark]);
 
   return (
     <Helmet>

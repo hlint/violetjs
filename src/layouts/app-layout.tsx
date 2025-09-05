@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
+import { NavLinkTransition } from "@/components/app/navigate-transition";
 import { ThemeModeSwitcher } from "@/components/app/theme/theme-mode-switcher";
 import { ThemePaletteSwitcher } from "@/components/app/theme/theme-palette-switcher";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -42,7 +43,7 @@ function NavMenu() {
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <NavLink to="/">Home</NavLink>
+              <NavLinkTransition to="/">Home</NavLinkTransition>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
@@ -51,13 +52,17 @@ function NavMenu() {
               <ul className="grid w-[200px] gap-4">
                 <li>
                   <NavigationMenuLink asChild>
-                    <NavLink to="/demo/todo">Todo</NavLink>
+                    <NavLinkTransition to="/demo/todo">Todo</NavLinkTransition>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <NavLink to="/demo/auth-required">Auth Required</NavLink>
+                    <NavLinkTransition to="/demo/auth-required">
+                      Auth Required
+                    </NavLinkTransition>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <NavLink to="/demo/error-handling">Error Handling</NavLink>
+                    <NavLinkTransition to="/demo/error-handling">
+                      Error Handling
+                    </NavLinkTransition>
                   </NavigationMenuLink>
                 </li>
               </ul>
@@ -68,7 +73,7 @@ function NavMenu() {
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <NavLink to="/about">About</NavLink>
+              <NavLinkTransition to="/about">About</NavLinkTransition>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

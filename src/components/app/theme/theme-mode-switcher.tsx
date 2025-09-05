@@ -11,15 +11,25 @@ export function ThemeModeSwitcher() {
   const colorMode = useThemeStore((s) => s.colorMode);
   const toggleColorMode = useThemeStore((s) => s.toggleColorMode);
   const setColorMode = useThemeStore((s) => s.setColorMode);
+  const setBoundingClientRect = useThemeStore((s) => s.setBoundingClientRect);
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
-          onClick={toggleColorMode}
+          onClick={(e) => {
+            e.preventDefault();
+            setBoundingClientRect(
+              e.currentTarget.getBoundingClientRect() || null
+            );
+            toggleColorMode();
+          }}
           onContextMenu={(e) => {
             e.preventDefault();
+            setBoundingClientRect(
+              e.currentTarget.getBoundingClientRect() || null
+            );
             setColorMode("system");
           }}
         >
