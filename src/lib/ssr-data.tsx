@@ -1,5 +1,6 @@
 import type { DemoTodo } from "@/db/schema";
 import type { Session } from "./types";
+import { isServer } from "./utils";
 
 export type SsrData = {
   swrFallback: {
@@ -13,8 +14,7 @@ export const refSsrData = {
 };
 
 export function getSsrData() {
-  const isServer = typeof window === "undefined";
-  if (isServer) {
+  if (isServer()) {
     return refSsrData.current;
   }
   return window.__SSR_DATA__;

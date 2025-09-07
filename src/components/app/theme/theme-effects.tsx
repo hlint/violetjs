@@ -1,5 +1,6 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
 import { useLayoutEffect } from "react";
+import { isServer } from "@/lib/utils";
 import { useThemeStore } from "@/store/_root";
 import { getPaletteStyles } from "./utils/get-palette-styles";
 
@@ -9,6 +10,11 @@ export function ThemeEffects() {
   useLayoutEffect(() => {
     initialize();
   }, [initialize]);
+  useLayoutEffect(() => {
+    if (isInitialized) {
+      window.document.documentElement.style.opacity = "1";
+    }
+  }, [isInitialized]);
   useLayoutEffect(() => {
     if (!isInitialized) {
       return;
@@ -31,16 +37,13 @@ export function ThemeEffects() {
     };
   }, [isInitialized, colorMode, setIsDark]);
   useLayoutEffect(() => {
-    if (isInitialized) {
-      window.document.body.style.opacity = "1";
-    }
-  }, [isInitialized]);
-  useLayoutEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(isDark ? "dark" : "light");
   }, [isDark]);
-
+  if (isServer()) {
+    return null;
+  }
   return (
     <Helmet>
       <style>{getPaletteStyles(palette)}</style>

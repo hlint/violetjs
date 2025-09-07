@@ -7,7 +7,12 @@ export default function HomePage() {
     <div>
       <HeadMeta title="Home" description="Home page" />
       <div className="p-4 py-8 max-w-4xl mx-auto">
-        <MarkdownPreview text={README} />
+        <MarkdownPreview
+          text={README.replace(
+            "[![banner](/public/banner.png)]",
+            "[![banner](/banner.png)]",
+          )}
+        />
       </div>
     </div>
   );

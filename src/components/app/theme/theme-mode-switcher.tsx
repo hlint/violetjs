@@ -21,14 +21,14 @@ export function ThemeModeSwitcher() {
           onClick={(e) => {
             e.preventDefault();
             setBoundingClientRect(
-              e.currentTarget.getBoundingClientRect() || null
+              e.currentTarget.getBoundingClientRect() || null,
             );
             toggleColorMode();
           }}
           onContextMenu={(e) => {
             e.preventDefault();
             setBoundingClientRect(
-              e.currentTarget.getBoundingClientRect() || null
+              e.currentTarget.getBoundingClientRect() || null,
             );
             setColorMode("system");
           }}

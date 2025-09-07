@@ -40,7 +40,7 @@ export default function TodoPage() {
   const handleToggleCompleted = (id: number) => {
     mutate(orpc.demo.todo.toggleCompleted({ id }).then(undefined), {
       optimisticData: todos.map((t) =>
-        t.id === id ? { ...t, completed: !t.completed } : t
+        t.id === id ? { ...t, completed: !t.completed } : t,
       ),
       populateCache: false,
       revalidate: false,
@@ -80,7 +80,7 @@ export default function TodoPage() {
                 type="button"
                 className={cn(
                   "cursor-pointer",
-                  todo.completed && "line-through"
+                  todo.completed && "line-through",
                 )}
                 onClick={() => handleToggleCompleted(todo.id)}
               >

@@ -3,10 +3,11 @@ import { RPCLink } from "@orpc/client/fetch";
 import { os, type RouterClient } from "@orpc/server";
 import type { OrpcRouter } from "@/server/orpc-router";
 import type { Session } from "./types";
+import { isServer } from "./utils";
 
 const link = new RPCLink({
   url: () => {
-    if (typeof window === "undefined") {
+    if (isServer()) {
       throw new Error("RPCLink is not allowed on the server side.");
     }
 

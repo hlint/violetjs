@@ -24,7 +24,7 @@ export function ThemePaletteRandomSwitcher() {
           onClick={(e) => {
             e.preventDefault();
             setBoundingClientRect(
-              e.currentTarget.getBoundingClientRect() || null
+              e.currentTarget.getBoundingClientRect() || null,
             );
             const nextIndex = randomInt(0, skinNames.current.length - 1);
             setPalette(skinNames.current[nextIndex]);
@@ -32,7 +32,7 @@ export function ThemePaletteRandomSwitcher() {
           onContextMenu={(e) => {
             e.preventDefault();
             setBoundingClientRect(
-              e.currentTarget.getBoundingClientRect() || null
+              e.currentTarget.getBoundingClientRect() || null,
             );
             setPalette("default");
           }}

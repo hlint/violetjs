@@ -50,7 +50,7 @@ export const createThemeSlice: StateCreator<
         let theme = ThemeSchema.parse({});
         try {
           theme = ThemeSchema.parse(
-            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}")
+            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}"),
           );
         } catch (_error) {}
         set((d) => {
@@ -64,7 +64,7 @@ export const createThemeSlice: StateCreator<
       save: () => {
         localStorage.setItem(
           THEME_STORAGE_KEY,
-          JSON.stringify(ThemeSchema.parse(get().theme))
+          JSON.stringify(ThemeSchema.parse(get().theme)),
         );
       },
       setColorMode: (colorMode) => {
@@ -85,16 +85,16 @@ export const createThemeSlice: StateCreator<
           set((d) => {
             d.theme.isDark = isDark;
           });
+          get().theme.save();
         });
-        get().theme.save();
       },
       setPalette: (palette) => {
         get().theme.pageTransitionAnimation(() => {
           set((d) => {
             d.theme.palette = palette;
           });
+          get().theme.save();
         });
-        get().theme.save();
       },
       setBoundingClientRect: (boundingClientRect) => {
         set((d) => {
@@ -118,7 +118,7 @@ export const createThemeSlice: StateCreator<
           const bottom = window.innerHeight - top;
           const maxRad = Math.hypot(
             Math.max(left, right),
-            Math.max(top, bottom)
+            Math.max(top, bottom),
           );
 
           document.documentElement.animate(
@@ -132,7 +132,7 @@ export const createThemeSlice: StateCreator<
               duration: 700,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            }
+            },
           );
           set((d) => {
             d.theme.boundingClientRect = null;
@@ -146,7 +146,7 @@ export const createThemeSlice: StateCreator<
               duration: 300,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            }
+            },
           );
         }
       },

@@ -114,8 +114,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    @apply transition-opacity duration-200;
+  }
+
   body {
-    @apply bg-background text-foreground transition-opacity duration-200;
+    @apply bg-background text-foreground;
   }
 }
 

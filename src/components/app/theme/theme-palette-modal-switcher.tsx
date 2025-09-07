@@ -47,7 +47,7 @@ function ModalContent() {
           Select a palette to use for your application.
         </DialogDescription>
       </DialogHeader>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-auto max-h-[calc(100vh-200px)]">
+      <div className="p-1 hover-show-scroller grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-auto max-h-[calc(100vh-200px)]">
         {palettes.map((p) => (
           <PaletteItem
             key={p.name}
@@ -77,7 +77,7 @@ function PaletteItem({
       className={cn(
         "flex w-full h-full items-center justify-start relative transition-colors duration-200 bg-primary/10",
         "px-4 py-3",
-        selected ? "ring-2 ring-primary/50 shadow-md" : ""
+        selected ? "ring-2 ring-primary/50 shadow-md" : "",
       )}
       variant="ghost"
       style={{

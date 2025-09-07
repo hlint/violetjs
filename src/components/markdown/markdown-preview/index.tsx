@@ -21,7 +21,7 @@ export default function MarkdownPreview({
       className={cn(
         "w-full overflow-auto prose prose-md max-w-none",
         "prose-pre:p-0 prose-img:rounded-md prose-pre:rounded-lg prose-code:whitespace-pre-wrap prose-code:overflow-auto prose-code:text-primary",
-        className
+        className,
       )}
     >
       <Markdown
@@ -40,7 +40,7 @@ export default function MarkdownPreview({
               rewrite: (
                 node: Root | RootContent,
                 _index: number | null,
-                _parent: Root | Element | null
+                _parent: Root | Element | null,
               ) => {
                 if (node.type === "element" && node.tagName === "pre") {
                   const codeElement = node.children[0];
@@ -53,7 +53,7 @@ export default function MarkdownPreview({
                     const language =
                       /language-(\w+)/.exec(className as string)?.[1] ?? "";
                     codeElement.children.unshift(
-                      codeHeader({ code, language })
+                      codeHeader({ code, language }),
                     );
                   }
                 }
@@ -129,7 +129,7 @@ function codeHeader({ code, language }: { code: string; language: string }) {
         const self =
           trigger.tagName === "svg" ? trigger : trigger.parentElement!;
         const elCopied = self.parentElement?.querySelector(
-          ".elCopied"
+          ".elCopied",
         ) as HTMLElement;
 
         self.classList.add("hidden");

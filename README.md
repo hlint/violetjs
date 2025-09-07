@@ -1,4 +1,4 @@
-[![banner](/banner.png)](https://github.com/hlint/violetjs)
+[![banner](/public/banner.png)](https://github.com/hlint/violetjs)
 
 Volitejs is a full-stack ReactJS development framework powered by Vite, featuring SSR and SSG support, along with built-in database, authentication, oRPC, and other feature integrations.
 

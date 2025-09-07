@@ -8,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { isServer } from "@/lib/utils";
 
 export default function ErrorHandlingPage() {
   const [error, setError] = useState(false);
@@ -21,28 +23,32 @@ export default function ErrorHandlingPage() {
         <CardTitle>Error Handling</CardTitle>
         <CardDescription>Error Handling Demo</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2">
+      <CardContent className="flex flex-col gap-4">
         <p className="">
           This text is rendered on{" "}
-          <span className="font-bold">
-            {typeof window === "undefined" ? "Server" : "Client"}
+          <span className="font-bold text-primary">
+            {isServer() ? "Server" : "Client"}
           </span>
-          , and will cause a hydration error.
+          , and will cause a{" "}
+          <span className="font-bold text-destructive">hydration error</span>{" "}
+          when you refresh the page.
         </p>
-        <div className="flex flex-row gap-2">
+        <Separator />
+        <p>Errors are handled by default, try this now:</p>
+        <div className="flex flex-row gap-4">
           <Button
             onClick={() => {
               throw new Error("test");
             }}
           >
-            Callback Error
+            Throw a callback error
           </Button>
           <Button
             onClick={() => {
               setError(true);
             }}
           >
-            Runtime Error
+            Throw a render error
           </Button>
         </div>
       </CardContent>
