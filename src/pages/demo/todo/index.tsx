@@ -31,29 +31,23 @@ export default function TodoPage() {
     return null;
   }
   const handleRemoveTodo = (id: number) => {
-    const optimisticData = todos.filter((t) => t.id !== id);
-    mutate(
-      async () => {
-        await orpc.demo.todo.removeTodo({ id });
-        return optimisticData;
-      },
-      { optimisticData, revalidate: false }
-    );
+    mutate(orpc.demo.todo.removeTodo({ id }).then(undefined), {
+      optimisticData: todos.filter((t) => t.id !== id),
+      populateCache: false,
+      revalidate: false,
+    });
   };
   const handleToggleCompleted = (id: number) => {
-    const optimisticData = todos.map((t) =>
-      t.id === id ? { ...t, completed: !t.completed } : t
-    );
-    mutate(
-      async () => {
-        await orpc.demo.todo.toggleCompleted({ id });
-        return optimisticData;
-      },
-      { optimisticData, revalidate: false }
-    );
+    mutate(orpc.demo.todo.toggleCompleted({ id }).then(undefined), {
+      optimisticData: todos.map((t) =>
+        t.id === id ? { ...t, completed: !t.completed } : t
+      ),
+      populateCache: false,
+      revalidate: false,
+    });
   };
   return (
-    <Card className="w-2xl">
+    <Card className="w-2xl" magic>
       <HeadMeta title={title} description={description} />
       <CardHeader>
         <CardTitle>{title}</CardTitle>
@@ -114,24 +108,17 @@ export default function TodoPage() {
 function FormAddTodo({ todos }: { todos: DemoTodo[] }) {
   const { mutate } = useSWRConfig();
   const handleAddTodo = (title: string) => {
-    const optimisticData = [
-      ...todos,
-      {
-        id: Math.max(...todos.map((t) => t.id)) + 1,
-        title: `* ${title}`,
-        completed: false,
-      },
-    ];
-    mutate(
-      "todos",
-      async () => {
-        await orpc.demo.todo.addTodo({ title });
-        return optimisticData;
-      },
-      {
-        optimisticData,
-      }
-    );
+    mutate("todos", orpc.demo.todo.addTodo({ title }), {
+      populateCache: false,
+      optimisticData: [
+        ...todos,
+        {
+          id: Math.max(...todos.map((t) => t.id)) + 1,
+          title: `* ${title}`,
+          completed: false,
+        },
+      ],
+    });
   };
   return (
     <form

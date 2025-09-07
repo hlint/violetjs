@@ -8,7 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -24,7 +23,7 @@ import { useSession } from "@/hooks/use-session";
 
 export default function AppLayout() {
   return (
-    <main className="flex flex-col h-screen w-screen p-2">
+    <main className="flex flex-col h-screen p-2">
       <NavMenu />
       <div className="flex-1 flex items-center justify-center">
         <Outlet />
@@ -68,14 +67,6 @@ function NavMenu() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink
-              asChild
-              className={navigationMenuTriggerStyle()}
-            >
-              <NavLinkTransition to="/about">About</NavLinkTransition>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex-1" />
@@ -102,8 +93,6 @@ function UserMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <a href="/auth/sign-in">Switch Account</a>
         </DropdownMenuItem>

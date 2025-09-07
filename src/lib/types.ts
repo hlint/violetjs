@@ -1,6 +1,4 @@
 import type { SsrData } from "./ssr-data";
-import "@total-typescript/ts-reset";
-import "@total-typescript/ts-reset/dom";
 
 declare global {
   interface Window {

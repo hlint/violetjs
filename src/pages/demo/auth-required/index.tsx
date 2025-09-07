@@ -9,14 +9,16 @@ import {
 
 export default function AuthRequiredPage() {
   return (
-    <Card className="w-2xl">
+    <Card className="w-2xl" magic>
       <HeadMeta title="Auth Required" description="Auth Required Demo" />
       <CardHeader>
         <CardTitle>Auth Required</CardTitle>
         <CardDescription>This page is protected by auth guard</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>You are logged in.</p>
+        <p>
+          You are <b className="text-primary">logged in</b>.
+        </p>
       </CardContent>
     </Card>
   );

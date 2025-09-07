@@ -17,7 +17,6 @@ import RootLayout from "./layouts/root-layout";
 import SignInGuard from "./layouts/sign-in-guard";
 import { getSsrData } from "./lib/ssr-data";
 import NotFoundPage from "./pages/404";
-import AboutPage from "./pages/about";
 import SignInPage from "./pages/auth/sign-in";
 import SignOutPage from "./pages/auth/sign-out";
 import AuthRequiredPage from "./pages/demo/auth-required";
@@ -52,7 +51,6 @@ export default function App({
                   </Route>
                   <Route path="*" element={<AppLayout />}>
                     <Route index element={<HomePage />} />
-                    <Route path="about" element={<AboutPage />} />
                     <Route path="demo">
                       <Route path="todo" element={<TodoPage />} />
                       <Route path="auth-required" element={<SignInGuard />}>

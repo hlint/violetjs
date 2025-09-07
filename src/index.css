@@ -166,3 +166,7 @@
   animation: none;
   mix-blend-mode: normal;
 }
+
+.hljs {
+  background: unset !important;
+}

@@ -1,17 +1,34 @@
 import type * as React from "react";
 
+import { MagicCard } from "@/components/magicui/magic-card";
 import { cn } from "@/lib/utils";
+import { useThemeStore } from "@/store/_root";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({
+  className,
+  magic = false,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & { magic?: boolean }) {
+  const isDark = useThemeStore((s) => s.isDark);
   return (
     <div
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className,
+        magic && "p-0 shadow-none border-none",
+        className
       )}
       {...props}
-    />
+    >
+      {magic ? (
+        <MagicCard gradientColor={isDark ? "#262626" : "#D9D9D955"}>
+          <div className="flex flex-col gap-6 py-6">{children}</div>
+        </MagicCard>
+      ) : (
+        children
+      )}
+    </div>
   );
 }
 
@@ -21,7 +38,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-header"
       className={cn(
         "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
-        className,
+        className
       )}
       {...props}
     />
@@ -54,7 +71,7 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-action"
       className={cn(
         "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className,
+        className
       )}
       {...props}
     />

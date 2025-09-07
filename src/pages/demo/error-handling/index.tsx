@@ -15,7 +15,7 @@ export default function ErrorHandlingPage() {
     throw new Error("test");
   }
   return (
-    <Card className="w-2xl">
+    <Card className="w-2xl" magic>
       <HeadMeta title="Error Handling" description="Error Handling Demo" />
       <CardHeader>
         <CardTitle>Error Handling</CardTitle>

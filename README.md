@@ -1,34 +1,24 @@
-# violetjs
+[![banner](/banner.png)](https://github.com/hlint/violetjs)
 
-A full-stack ReactJS development framework powered by Vite, featuring SSR and SSG support, along with built-in database, authentication, oRPC, and other feature integrations.
+Volitejs is a full-stack ReactJS development framework powered by Vite, featuring SSR and SSG support, along with built-in database, authentication, oRPC, and other feature integrations.
 
 ## Quick Start
 
-### 1. Install dependencies
-
 ```bash
+# 1. Install dependencies
 bun ci
-```
 
-### 2. Some Configurations
-
-```bash
+# 2. Some Configurations
 cp .env.example .env
-```
 
-### 3. Start the development server
-
-```bash
+# 3. Start the development server
 bun dev
-```
 
-### 4. Build the application
-
-```bash
+# 4. Build the application
 bun run build
 ```
 
-## Why VioletJS?
+## Why Volitejs?
 
 ### The Motivation
 
