@@ -4,9 +4,9 @@ import type { StateCreator } from "zustand";
 import type { RootStoreState } from "./_root";
 
 const ThemeSchema = z.object({
-  colorMode: z.enum(["system", "light", "dark"]).default("system"),
-  isDark: z.boolean().default(false),
-  palette: z.string().default("default"),
+  colorMode: z.enum(["system", "light", "dark"]).default("dark"),
+  isDark: z.boolean().default(true),
+  palette: z.string().default("cosmic-night"),
 });
 export type Theme = z.infer<typeof ThemeSchema>;
 const THEME_STORAGE_KEY = "violet-ui-theme";
@@ -50,7 +50,7 @@ export const createThemeSlice: StateCreator<
         let theme = ThemeSchema.parse({});
         try {
           theme = ThemeSchema.parse(
-            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}"),
+            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}")
           );
         } catch (_error) {}
         set((d) => {
@@ -64,7 +64,7 @@ export const createThemeSlice: StateCreator<
       save: () => {
         localStorage.setItem(
           THEME_STORAGE_KEY,
-          JSON.stringify(ThemeSchema.parse(get().theme)),
+          JSON.stringify(ThemeSchema.parse(get().theme))
         );
       },
       setColorMode: (colorMode) => {
@@ -118,7 +118,7 @@ export const createThemeSlice: StateCreator<
           const bottom = window.innerHeight - top;
           const maxRad = Math.hypot(
             Math.max(left, right),
-            Math.max(top, bottom),
+            Math.max(top, bottom)
           );
 
           document.documentElement.animate(
@@ -132,7 +132,7 @@ export const createThemeSlice: StateCreator<
               duration: 700,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            },
+            }
           );
           set((d) => {
             d.theme.boundingClientRect = null;
@@ -146,7 +146,7 @@ export const createThemeSlice: StateCreator<
               duration: 300,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            },
+            }
           );
         }
       },

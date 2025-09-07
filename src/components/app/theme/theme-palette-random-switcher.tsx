@@ -10,7 +10,7 @@ import {
 import { useThemeStore } from "@/store/_root";
 import { palettes } from "./palettes";
 
-export function ThemePaletteSwitcher() {
+export function ThemePaletteRandomSwitcher() {
   const skinNames = useRef(palettes.map((skin) => skin.name));
   const palette = useThemeStore((s) => s.palette);
   const setPalette = useThemeStore((s) => s.setPalette);

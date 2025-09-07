@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { NavLinkTransition } from "@/components/app/navigate-transition";
 import { ThemeModeSwitcher } from "@/components/app/theme/theme-mode-switcher";
-import { ThemePaletteSwitcher } from "@/components/app/theme/theme-palette-switcher";
+import { ThemePaletteModalSwitcher } from "@/components/app/theme/theme-palette-modal-switcher";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -70,7 +70,7 @@ function NavMenu() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex-1" />
-      <ThemePaletteSwitcher />
+      <ThemePaletteModalSwitcher />
       <ThemeModeSwitcher />
       <UserMenu />
     </nav>
