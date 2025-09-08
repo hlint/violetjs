@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun run build:clear && bun run build:client && bun run build:server && bun run build:server-bundle && bun run build:entry && bun run build:after",
+    "build": "bun run test && bun run build:clear && bun run build:client && bun run build:server && bun run build:server-bundle && bun run build:entry && bun run build:after",
     "build:after": "cp .env.example dist/.env && cp -r drizzle dist/drizzle",
     "build:clear": "rm -rf dist",
     "build:client": "bunx --bun vite build --outDir dist/client",
@@ -24,6 +24,7 @@
     "lint:fix": "biome check --write --unsafe .",
     "preview": "bun run build && cp .env dist/.env && cp -r runtime dist/runtime && cd dist && bun main.js",
     "sort": "sort-package-json",
+    "test": "vitest run",
     "tsc": "tsc"
   },
   "dependencies": {
@@ -144,6 +145,7 @@
     "tailwindcss": "^4.1.12",
     "tw-animate-css": "^1.3.7",
     "typescript": "~5.9.2",
-    "vite": "^7.0.6"
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
   }
 }

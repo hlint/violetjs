@@ -1,5 +1,5 @@
-import { expect, test } from "bun:test";
 import { StaticRouter } from "react-router";
+import { expect, test } from "vitest";
 import App from "@/app";
 import { cheerioRender } from "./utils";
 
