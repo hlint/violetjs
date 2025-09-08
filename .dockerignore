@@ -26,7 +26,6 @@ Dockerfile
 .dockerignore
 .vscode
 LICENSE
-README.md
 
 # App
 runtime
