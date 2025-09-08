@@ -94,11 +94,11 @@ msgstr "This page is protected by auth guard"
 msgid "This text is rendered on <0>{0}</0>, and will cause a <1>hydration error</1> when you refresh the page."
 msgstr "This text is rendered on <0>{0}</0>, and will cause a <1>hydration error</1> when you refresh the page."
 
-#: src/pages/demo/error-handling/index.tsx:54
+#: src/pages/demo/error-handling/index.tsx:56
 msgid "Throw a callback error"
 msgstr "Throw a callback error"
 
-#: src/pages/demo/error-handling/index.tsx:61
+#: src/pages/demo/error-handling/index.tsx:64
 msgid "Throw a render error"
 msgstr "Throw a render error"
 

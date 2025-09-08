@@ -94,11 +94,11 @@ msgstr "此页面受身份验证保护"
 msgid "This text is rendered on <0>{0}</0>, and will cause a <1>hydration error</1> when you refresh the page."
 msgstr "此文本在 <0>{0}</0> 上渲染，当您刷新页面时会导致 <1>水合错误</1>。"
 
-#: src/pages/demo/error-handling/index.tsx:54
+#: src/pages/demo/error-handling/index.tsx:56
 msgid "Throw a callback error"
 msgstr "抛出回调错误"
 
-#: src/pages/demo/error-handling/index.tsx:61
+#: src/pages/demo/error-handling/index.tsx:64
 msgid "Throw a render error"
 msgstr "抛出渲染错误"
 
