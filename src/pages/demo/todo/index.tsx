@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { RefreshCcwIcon, TrashIcon } from "lucide-react";
 import useSWR, { useSWRConfig } from "swr";
 import HeadMeta from "@/components/app/head-meta";
@@ -16,9 +18,6 @@ import { Input } from "@/components/ui/input";
 import type { DemoTodo } from "@/db/schema";
 import { orpc } from "@/lib/orpc-client";
 import { cn } from "@/lib/utils";
-
-const title = "Todo";
-const description = "A simple todo demo with ssr, orpc, drizzle, and zustand.";
 
 export default function TodoPage() {
   const {
@@ -48,10 +47,14 @@ export default function TodoPage() {
   };
   return (
     <Card className="w-2xl" magic>
-      <HeadMeta title={title} description={description} />
+      <HeadMeta title={t`Todo`} />
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle>
+          <Trans>Todo</Trans>
+        </CardTitle>
+        <CardDescription>
+          <Trans>A simple todo demo with ssr, orpc, swr anddrizzle.</Trans>
+        </CardDescription>
         <CardAction>
           <Button
             size="icon"
@@ -140,7 +143,9 @@ function FormAddTodo({ todos }: { todos: DemoTodo[] }) {
         required
         autoFocus
       />
-      <Button type="submit">Add</Button>
+      <Button type="submit">
+        <Trans>Add</Trans>
+      </Button>
     </form>
   );
 }

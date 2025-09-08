@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import HeadMeta from "@/components/app/head-meta";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -11,24 +12,28 @@ export default function SignInPage() {
     <Card className="min-w-sm">
       <HeadMeta title="Sign In" description="Sign In to your account" />
       <CardHeader>
-        <CardTitle>Sign In</CardTitle>
+        <CardTitle>
+          <Trans>Sign In</Trans>
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <p>Sign in to your account to continue.</p>
+        <p>
+          <Trans>Sign in to your account to continue.</Trans>
+        </p>
         <form action="/auth/signin/github" method="post">
           <CsrfInput csrfToken={csrfToken} />
           <Button variant="outline" className="w-full" type="submit">
             <Avatar className="size-5">
               <AvatarImage src="https://authjs.dev/img/providers/github.svg" />
             </Avatar>
-            Continue with GitHub
+            <Trans>Continue with GitHub</Trans>
           </Button>
         </form>
         <Button variant="outline" className="w-full" type="button" disabled>
           <Avatar className="size-5">
             <AvatarImage src="https://authjs.dev/img/providers/google.svg" />
           </Avatar>
-          Continue with Google
+          <Trans>Continue with Google</Trans>
         </Button>
         <BackToHome />
       </CardContent>

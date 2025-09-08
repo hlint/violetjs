@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import { SWRConfig } from "swr";
 import ErrorFallback from "./components/app/error-fallback";
 import ErrorNotifier from "./components/app/error-notifier";
+import { I18nAppProvider } from "./components/app/i18n/i18n";
 import { ThemeEffects } from "./components/app/theme/theme-effects";
 import { SessionProvider } from "./hooks/use-session";
 import AppLayout from "./layouts/app-layout";
@@ -39,35 +40,37 @@ export default function App({
           fallback: getSsrData()?.swrFallback,
         }}
       >
-        <RootStoreProvider>
-          <SessionProvider>
-            <HelmetProvider context={helmetContext}>
-              <ThemeEffects />
-              <Routes>
-                <Route path="*" element={<RootLayout />}>
-                  <Route path="auth" element={<AuthLayout />}>
-                    <Route path="sign-in" element={<SignInPage />} />
-                    <Route path="sign-out" element={<SignOutPage />} />
-                  </Route>
-                  <Route path="*" element={<AppLayout />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="demo">
-                      <Route path="todo" element={<TodoPage />} />
-                      <Route path="auth-required" element={<SignInGuard />}>
-                        <Route index element={<AuthRequiredPage />} />
-                      </Route>
-                      <Route
-                        path="error-handling"
-                        element={<ErrorHandlingPage />}
-                      />
+        <I18nAppProvider>
+          <RootStoreProvider>
+            <SessionProvider>
+              <HelmetProvider context={helmetContext}>
+                <ThemeEffects />
+                <Routes>
+                  <Route path="*" element={<RootLayout />}>
+                    <Route path="auth" element={<AuthLayout />}>
+                      <Route path="sign-in" element={<SignInPage />} />
+                      <Route path="sign-out" element={<SignOutPage />} />
                     </Route>
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route path="*" element={<AppLayout />}>
+                      <Route index element={<HomePage />} />
+                      <Route path="demo">
+                        <Route path="todo" element={<TodoPage />} />
+                        <Route path="auth-required" element={<SignInGuard />}>
+                          <Route index element={<AuthRequiredPage />} />
+                        </Route>
+                        <Route
+                          path="error-handling"
+                          element={<ErrorHandlingPage />}
+                        />
+                      </Route>
+                      <Route path="*" element={<NotFoundPage />} />
+                    </Route>
                   </Route>
-                </Route>
-              </Routes>
-            </HelmetProvider>
-          </SessionProvider>
-        </RootStoreProvider>
+                </Routes>
+              </HelmetProvider>
+            </SessionProvider>
+          </RootStoreProvider>
+        </I18nAppProvider>
       </SWRConfig>
     </ErrorBoundary>
   );

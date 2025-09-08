@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-09-07 18:22-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/pages/demo/todo/index.tsx:56
+msgid "A simple todo demo with ssr, orpc, swr anddrizzle."
+msgstr "A simple todo demo with ssr, orpc, swr anddrizzle."
+
+#: src/pages/demo/todo/index.tsx:147
+msgid "Add"
+msgstr "Add"
+
+#: src/pages/auth/sign-out/index.tsx:20
+msgid "Are you sure you want to sign out?"
+msgstr "Are you sure you want to sign out?"
+
+#: src/layouts/app-layout.tsx:66
+#: src/pages/demo/auth-required/index.tsx:15
+#: src/pages/demo/auth-required/index.tsx:18
+msgid "Auth Required"
+msgstr "Auth Required"
+
+#: src/pages/auth/_components/back-to-home.tsx:9
+msgid "Back to Home"
+msgstr "Back to Home"
+
+#: src/pages/auth/sign-in/index.tsx:29
+msgid "Continue with GitHub"
+msgstr "Continue with GitHub"
+
+#: src/pages/auth/sign-in/index.tsx:36
+msgid "Continue with Google"
+msgstr "Continue with Google"
+
+#: src/layouts/app-layout.tsx:54
+msgid "Demo"
+msgstr "Demo"
+
+#: src/layouts/app-layout.tsx:71
+#: src/pages/demo/error-handling/index.tsx:23
+#: src/pages/demo/error-handling/index.tsx:26
+msgid "Error Handling"
+msgstr "Error Handling"
+
+#: src/pages/demo/error-handling/index.tsx:29
+msgid "Error Handling Demo"
+msgstr "Error Handling Demo"
+
+#: src/pages/demo/error-handling/index.tsx:46
+msgid "Errors are handled by default, try this now:"
+msgstr "Errors are handled by default, try this now:"
+
+#: src/layouts/app-layout.tsx:48
+#: src/pages/home/index.tsx:9
+msgid "Home"
+msgstr "Home"
+
+#: src/layouts/app-layout.tsx:120
+#: src/pages/auth/sign-in/index.tsx:16
+msgid "Sign In"
+msgstr "Sign In"
+
+#: src/pages/auth/sign-in/index.tsx:21
+msgid "Sign in to your account to continue."
+msgstr "Sign in to your account to continue."
+
+#: src/layouts/app-layout.tsx:112
+#: src/pages/auth/sign-out/index.tsx:15
+#: src/pages/auth/sign-out/index.tsx:25
+msgid "Sign Out"
+msgstr "Sign Out"
+
+#: src/layouts/app-layout.tsx:107
+msgid "Switch Account"
+msgstr "Switch Account"
+
+#: src/pages/demo/auth-required/index.tsx:21
+msgid "This page is protected by auth guard"
+msgstr "This page is protected by auth guard"
+
+#. placeholder {0}: isServer() ? "Server" : "Client"
+#: src/pages/demo/error-handling/index.tsx:34
+msgid "This text is rendered on <0>{0}</0>, and will cause a <1>hydration error</1> when you refresh the page."
+msgstr "This text is rendered on <0>{0}</0>, and will cause a <1>hydration error</1> when you refresh the page."
+
+#: src/pages/demo/error-handling/index.tsx:54
+msgid "Throw a callback error"
+msgstr "Throw a callback error"
+
+#: src/pages/demo/error-handling/index.tsx:61
+msgid "Throw a render error"
+msgstr "Throw a render error"
+
+#: src/layouts/app-layout.tsx:61
+#: src/pages/demo/todo/index.tsx:50
+#: src/pages/demo/todo/index.tsx:53
+msgid "Todo"
+msgstr "Todo"
+
+#: src/pages/demo/auth-required/index.tsx:26
+msgid "You are <0>logged in</0>."
+msgstr "You are <0>logged in</0>."

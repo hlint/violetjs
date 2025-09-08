@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { useState } from "react";
 import HeadMeta from "@/components/app/head-meta";
 import { Button } from "@/components/ui/button";
@@ -18,37 +20,48 @@ export default function ErrorHandlingPage() {
   }
   return (
     <Card className="w-2xl" magic>
-      <HeadMeta title="Error Handling" description="Error Handling Demo" />
+      <HeadMeta title={t`Error Handling`} />
       <CardHeader>
-        <CardTitle>Error Handling</CardTitle>
-        <CardDescription>Error Handling Demo</CardDescription>
+        <CardTitle>
+          <Trans>Error Handling</Trans>
+        </CardTitle>
+        <CardDescription>
+          <Trans>Error Handling Demo</Trans>
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <p className="">
-          This text is rendered on{" "}
-          <span className="font-bold text-primary">
-            {isServer() ? "Server" : "Client"}
-          </span>
-          , and will cause a{" "}
-          <span className="font-bold text-destructive">hydration error</span>{" "}
-          when you refresh the page.
+          <Trans>
+            This text is rendered on{" "}
+            <span className="font-bold text-primary">
+              {isServer() ? "Server" : "Client"}
+            </span>
+            , and will cause a{" "}
+            <span className="font-bold text-destructive">hydration error</span>{" "}
+            when you refresh the page.
+          </Trans>
         </p>
         <Separator />
-        <p>Errors are handled by default, try this now:</p>
+        <p>
+          <Trans>Errors are handled by default, try this now:</Trans>
+        </p>
         <div className="flex flex-row gap-4">
-          <Button
-            onClick={() => {
-              throw new Error("test");
-            }}
-          >
-            Throw a callback error
-          </Button>
+          {/* A toaster will be shown in development */}
+          {import.meta.env.DEV && (
+            <Button
+              onClick={() => {
+                throw new Error("test");
+              }}
+            >
+              <Trans>Throw a callback error</Trans>
+            </Button>
+          )}
           <Button
             onClick={() => {
               setError(true);
             }}
           >
-            Throw a render error
+            <Trans>Throw a render error</Trans>
           </Button>
         </div>
       </CardContent>

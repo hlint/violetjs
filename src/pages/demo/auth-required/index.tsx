@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import HeadMeta from "@/components/app/head-meta";
 import {
   Card,
@@ -10,14 +12,20 @@ import {
 export default function AuthRequiredPage() {
   return (
     <Card className="w-2xl" magic>
-      <HeadMeta title="Auth Required" description="Auth Required Demo" />
+      <HeadMeta title={t`Auth Required`} />
       <CardHeader>
-        <CardTitle>Auth Required</CardTitle>
-        <CardDescription>This page is protected by auth guard</CardDescription>
+        <CardTitle>
+          <Trans>Auth Required</Trans>
+        </CardTitle>
+        <CardDescription>
+          <Trans>This page is protected by auth guard</Trans>
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <p>
-          You are <b className="text-primary">logged in</b>.
+          <Trans>
+            You are <b className="text-primary">logged in</b>.
+          </Trans>
         </p>
       </CardContent>
     </Card>

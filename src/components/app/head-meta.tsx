@@ -4,8 +4,8 @@ export default function HeadMeta({
   title,
   description,
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 }) {
   return (
     <Helmet>

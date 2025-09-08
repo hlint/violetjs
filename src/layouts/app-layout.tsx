@@ -1,4 +1,6 @@
+import { Trans } from "@lingui/react/macro";
 import { Outlet } from "react-router";
+import LocaleSwitcher from "@/components/app/i18n/locale-switcher";
 import { NavLinkTransition } from "@/components/app/navigate-transition";
 import { ThemeModeSwitcher } from "@/components/app/theme/theme-mode-switcher";
 import { ThemePaletteModalSwitcher } from "@/components/app/theme/theme-palette-modal-switcher";
@@ -34,7 +36,7 @@ export default function AppLayout() {
 
 function NavMenu() {
   return (
-    <nav className="flex-0 flex items-center">
+    <nav className="flex-0 flex items-center gap-2">
       <NavigationMenu viewport={false}>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -42,25 +44,31 @@ function NavMenu() {
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <NavLinkTransition to="/">Home</NavLinkTransition>
+              <NavLinkTransition to="/">
+                <Trans>Home</Trans>
+              </NavLinkTransition>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Demo</NavigationMenuTrigger>
+            <NavigationMenuTrigger>
+              <Trans>Demo</Trans>
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[200px] gap-4">
                 <li>
                   <NavigationMenuLink asChild>
-                    <NavLinkTransition to="/demo/todo">Todo</NavLinkTransition>
+                    <NavLinkTransition to="/demo/todo">
+                      <Trans>Todo</Trans>
+                    </NavLinkTransition>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
                     <NavLinkTransition to="/demo/auth-required">
-                      Auth Required
+                      <Trans>Auth Required</Trans>
                     </NavLinkTransition>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
                     <NavLinkTransition to="/demo/error-handling">
-                      Error Handling
+                      <Trans>Error Handling</Trans>
                     </NavLinkTransition>
                   </NavigationMenuLink>
                 </li>
@@ -70,6 +78,7 @@ function NavMenu() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex-1" />
+      <LocaleSwitcher />
       <ThemePaletteModalSwitcher />
       <ThemeModeSwitcher />
       <UserMenu />
@@ -94,16 +103,22 @@ function UserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <a href="/auth/sign-in">Switch Account</a>
+          <a href="/auth/sign-in">
+            <Trans>Switch Account</Trans>
+          </a>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <a href="/auth/sign-out">Sign Out</a>
+          <a href="/auth/sign-out">
+            <Trans>Sign Out</Trans>
+          </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
     <Button variant="ghost">
-      <a href="/auth/sign-in">Sign In</a>
+      <a href="/auth/sign-in">
+        <Trans>Sign In</Trans>
+      </a>
     </Button>
   );
 }

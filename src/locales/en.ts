@@ -1,0 +1,4 @@
+/*eslint-disable*/ import type { Messages } from "@lingui/core";
+export const messages = JSON.parse(
+  '{"0Dg/Ui":["Throw a render error"],"0HD+9I":["Errors are handled by default, try this now:"],"5Rq6w1":["Continue with GitHub"],"D3PzOt":["Error Handling Demo"],"DzqB0O":["Auth Required"],"RWLG6K":["Back to Home"],"RoTUlL":["Todo"],"VjWeLI":["Switch Account"],"ZVUNe3":["This page is protected by auth guard"],"apLLSU":["Are you sure you want to sign out?"],"bHYIks":["Sign Out"],"fm00KJ":["Throw a callback error"],"i0qMbr":["Home"],"iMx3Nw":["This text is rendered on <0>",["0"],"</0>, and will cause a <1>hydration error</1> when you refresh the page."],"iUQv9m":["Sign in to your account to continue."],"kc+zZA":["Demo"],"m16xKo":["Add"],"mqOcKc":["You are <0>logged in</0>."],"n1ekoW":["Sign In"],"oZyG4C":["Continue with Google"],"rBrk7L":["Error Handling"],"xXb2Np":["A simple todo demo with ssr, orpc, swr anddrizzle."]}',
+) as Messages;

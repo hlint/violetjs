@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import HeadMeta from "@/components/app/head-meta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,14 +11,18 @@ export default function SignOutPage() {
     <Card className="min-w-sm">
       <HeadMeta title="Sign Out" description="Sign Out of your account" />
       <CardHeader>
-        <CardTitle>Sign Out</CardTitle>
+        <CardTitle>
+          <Trans>Sign Out</Trans>
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <p>Are you sure you want to sign out?</p>
+        <p>
+          <Trans>Are you sure you want to sign out?</Trans>
+        </p>
         <form action="/auth/signout" method="post">
           <CsrfInput csrfToken={csrfToken} />
           <Button variant="default" className="w-full" type="submit">
-            Sign Out
+            <Trans>Sign Out</Trans>
           </Button>
         </form>
         <BackToHome />
