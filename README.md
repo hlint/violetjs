@@ -10,7 +10,7 @@ For now, you need to have a `bun` installed.
 
 ```bash
 # 1. Install dependencies
-$ bun tool:ci
+$ bun ci
 
 # 2. Environment Variables
 $ cp .env.example .env
@@ -19,21 +19,7 @@ $ cp .env.example .env
 $ bun dev
 ```
 
-You will see a commands menu like this:
-
-```bash
-? Select from commonly used commands
-❯ dev:hot
-  dev:preview
-  db:generate
-  i18n:extract
-  i18n:compile
-  test
-  more...
-(Use arrow keys to reveal more choices)
-```
-
-Select `dev:hot` and you will see the development server is running.
+You will see the development server is running.
 
 ## 🤔 Why Volitejs?
 

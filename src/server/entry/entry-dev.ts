@@ -3,8 +3,8 @@ import http from "node:http";
 import express from "express";
 import dbInitialize from "@/db/initialize.ts";
 import { env } from "@/lib/env.server.ts";
-import handleApp from "./handle-app.ts";
-import { handleSsrHtml } from "./handle-ssr-html.ts";
+import handleExpress from "../handle-express.ts";
+import { handleSsrHtml } from "./utils/handle-ssr-html.ts";
 
 // Initialize DB
 await dbInitialize();
@@ -25,7 +25,7 @@ const vite = await createServer({
 });
 app.use(vite.middlewares);
 
-handleApp(app);
+handleExpress(app);
 
 // Serve HTML
 app.use("*all", async (req, res) => {
@@ -36,8 +36,8 @@ app.use("*all", async (req, res) => {
     // Always read fresh template in development
     template = await fs.readFile("./index.html", "utf-8");
     template = await vite!.transformIndexHtml(url, template);
-    const render: typeof import("@/entry-server.tsx").render = (
-      await vite!.ssrLoadModule("/src/entry-server.tsx")
+    const render: typeof import("@/server/server-render.tsx").serverRender = (
+      await vite!.ssrLoadModule("/src/server/server-render.tsx")
     ).render;
 
     const html = await handleSsrHtml({

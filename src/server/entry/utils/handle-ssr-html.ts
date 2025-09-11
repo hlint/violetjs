@@ -1,13 +1,14 @@
 import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
-import type { Session } from "../../lib/types.ts";
-import ssrLoader, { type SsrLoaderContext } from "../ssr-loader.ts";
-import { renderHtml } from "./render-html.ts";
+import type { Session } from "../../../lib/types.ts";
+import ssrLoader, { type SsrLoaderContext } from "../../ssr-loader.ts";
+import { assembleHtmlPage } from "./assemble-html-page.ts";
 
-type CompiledServerRender = typeof import("@/entry-server.tsx").render;
+type CompiledServerRender =
+  typeof import("@/server/server-render.tsx").serverRender;
 
 export async function getCompiledServerRender() {
-  const modulePath = "./server/entry-server-bundle.js";
-  return (await import(modulePath)).render as CompiledServerRender;
+  const modulePath = "./server" + "/server-render-bundle.js"; // Avoid bundling
+  return (await import(modulePath)).serverRender as CompiledServerRender;
 }
 
 export async function handleSsrHtml({
@@ -27,7 +28,7 @@ export async function handleSsrHtml({
   const ssrData = await ssrLoader(url, context);
   const helmetContext: HelmetDataContext = {};
   const rendered = render(url, ssrData, helmetContext);
-  const html = renderHtml({
+  const html = assembleHtmlPage({
     template,
     rendered,
     ssrData,

@@ -2,13 +2,13 @@ import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server.node";
 import { StaticRouter } from "react-router";
-import App from "./app";
-import { refSsrData, type SsrData } from "./lib/ssr-data";
+import App from "../app";
+import { refSsrData, type SsrData } from "../lib/ssr-data";
 
-export function render(
+export function serverRender(
   url: string,
   ssrData?: SsrData,
-  helmetContext?: HelmetDataContext,
+  helmetContext?: HelmetDataContext
 ) {
   refSsrData.current = ssrData;
   const app = (

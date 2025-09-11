@@ -1,6 +1,6 @@
 import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
 
-export function renderHtml({
+export function assembleHtmlPage({
   template,
   rendered,
   ssrData,
@@ -16,7 +16,7 @@ export function renderHtml({
     .replace(
       `<!--app-html-->`,
       rendered +
-        `<script>window.__SSR_DATA__=${JSON.stringify(ssrData)}</script>`,
+        `<script>window.__SSR_DATA__=${JSON.stringify(ssrData)}</script>`
     );
 }
 

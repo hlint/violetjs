@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import {
   getCompiledServerRender,
   handleSsrHtml,
-} from "../entry/handle-ssr-html";
+} from "../entry/utils/handle-ssr-html";
 
 export default async function ssgUpdate(urls: string[]) {
   const htmlTemplatePath = "./client/index.html";

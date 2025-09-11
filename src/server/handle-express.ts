@@ -2,12 +2,12 @@ import { ExpressAuth, getSession } from "@auth/express";
 import { RPCHandler } from "@orpc/server/node";
 import cookieParser from "cookie-parser";
 import express from "express";
-import type { OsContext } from "../../lib/orpc-client.ts";
-import type { Session } from "../../lib/types.ts";
-import { authConfig } from "../auth.ts";
-import { orpcRouter } from "../orpc-router.ts";
+import type { OsContext } from "../lib/orpc-client.ts";
+import type { Session } from "../lib/types.ts";
+import { authConfig } from "./auth.ts";
+import { orpcRouter } from "./orpc-router.ts";
 
-export default function handleApp(app: express.Express) {
+export default function handleExpress(app: express.Express) {
   const rpcHandler = new RPCHandler(orpcRouter);
 
   // handle session

@@ -1,12 +1,16 @@
 import http from "node:http";
 import express from "express";
 import fs from "fs-extra";
+import open from "open";
 import sirv from "sirv";
 import dbInitialize from "@/db/initialize.ts";
 import { env } from "@/lib/env.server.ts";
+import handleExpress from "../handle-express.ts";
 import ssgInitialize from "../ssg/ssg-initialize.ts";
-import handleApp from "./handle-app.ts";
-import { getCompiledServerRender, handleSsrHtml } from "./handle-ssr-html.ts";
+import {
+  getCompiledServerRender,
+  handleSsrHtml,
+} from "./utils/handle-ssr-html.ts";
 
 // Initialize DB
 await dbInitialize();
@@ -29,8 +33,9 @@ app.use(compression());
 await fs.ensureDir("./runtime/ssg");
 app.use("/", sirv("./runtime/ssg", { extensions: ["html"] }));
 app.use("/", sirv("./client", { extensions: ["html"] }));
+app.use("/", sirv("./public", { extensions: ["html"] }));
 
-handleApp(app);
+handleExpress(app);
 
 const render = await getCompiledServerRender();
 // Serve HTML
@@ -56,5 +61,9 @@ app.use("*all", async (req, res) => {
 
 // Start http server
 server.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  const url = `http://localhost:${port}`;
+  console.log(`Server started at ${url}`);
+  if (env.AUTO_OPEN_BROWSER) {
+    open(url);
+  }
 });

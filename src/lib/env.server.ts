@@ -4,6 +4,11 @@ const message1 = "is required for auth.js";
 const message2 = "is required for current auth provider";
 
 const EnvSchema = z.object({
+  NODE_ENV: z.enum(["development", "production"]).default("production"),
+  AUTO_OPEN_BROWSER: z
+    .string()
+    .default("false")
+    .transform((val) => val === "true"),
   PORT: z
     .string()
     .transform((val) => parseInt(val, 10))
@@ -21,10 +26,11 @@ const { error, data } = EnvSchema.safeParse(process.env);
 if (error) {
   for (const issue of error.issues) {
     console.error(
-      ["Env error:", issue.path.join("."), issue.message].join(" "),
+      ["Env error:", issue.path.join("."), issue.message].join(" ")
     );
   }
   process.exit(1);
 }
 
 export const env = data;
+export const isDev = env.NODE_ENV === "development";
