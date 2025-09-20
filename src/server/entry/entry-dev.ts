@@ -38,7 +38,7 @@ app.use("*all", async (req, res) => {
     template = await vite!.transformIndexHtml(url, template);
     const render: typeof import("@/server/server-render.tsx").serverRender = (
       await vite!.ssrLoadModule("/src/server/server-render.tsx")
-    ).render;
+    ).serverRender;
 
     const html = await handleSsrHtml({
       resLocals: res.locals,
