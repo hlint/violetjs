@@ -51,6 +51,6 @@ async function build(platformName: string) {
   }
   const fileName = `dist/app-${platformName}.exe`;
   await run(
-    `${buildCommand} --outfile ${fileName} --target ${platform.target}`
+    `${buildCommand} --outfile ${fileName} --target ${platform.target}`,
   );
 }

@@ -1,5 +1,6 @@
 import { Trans } from "@lingui/react/macro";
 import { Outlet } from "react-router";
+import { ButtonInstallPWA } from "@/components/app/button-install-pwa";
 import LocaleSwitcher from "@/components/app/i18n/locale-switcher";
 import { NavLinkTransition } from "@/components/app/navigate-transition";
 import { ThemeModeSwitcher } from "@/components/app/theme/theme-mode-switcher";
@@ -25,7 +26,7 @@ import { useSession } from "@/hooks/use-session";
 
 export default function AppLayout() {
   return (
-    <main className="flex flex-col h-screen p-2">
+    <main className="flex flex-col min-h-svh p-2">
       <NavMenu />
       <div className="flex-1 flex items-center justify-center">
         <Outlet />
@@ -36,7 +37,7 @@ export default function AppLayout() {
 
 function NavMenu() {
   return (
-    <nav className="flex-0 flex items-center gap-2">
+    <nav className="flex-0 flex items-center gap-1">
       <NavigationMenu viewport={false}>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -79,8 +80,9 @@ function NavMenu() {
       </NavigationMenu>
       <div className="flex-1" />
       <LocaleSwitcher />
-      <ThemePaletteModalSwitcher />
       <ThemeModeSwitcher />
+      <ThemePaletteModalSwitcher />
+      <ButtonInstallPWA />
       <UserMenu />
     </nav>
   );

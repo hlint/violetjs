@@ -6,5 +6,5 @@ export async function cleanDist() {
 }
 
 export function run(command: string) {
-  return execa(command, { stdio: "inherit" });
+  return execa(command, { stdio: "inherit", shell: true });
 }

@@ -3,20 +3,15 @@ import express from "express";
 import fs from "fs-extra";
 import open from "open";
 import sirv from "sirv";
-import dbInitialize from "@/db/initialize.ts";
 import { env } from "@/lib/env.server.ts";
 import handleExpress from "../handle-express.ts";
-import ssgInitialize from "../ssg/ssg-initialize.ts";
 import {
   getCompiledServerRender,
   handleSsrHtml,
 } from "./utils/handle-ssr-html.ts";
+import prodInitialize from "./utils/prod-initialize.ts";
 
-// Initialize DB
-await dbInitialize();
-
-// Initialize SSG
-await ssgInitialize();
+await prodInitialize();
 
 // Constants
 const port = env.PORT;

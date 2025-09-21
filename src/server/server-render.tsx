@@ -8,7 +8,7 @@ import { refSsrData, type SsrData } from "../lib/ssr-data";
 export function serverRender(
   url: string,
   ssrData?: SsrData,
-  helmetContext?: HelmetDataContext
+  helmetContext?: HelmetDataContext,
 ) {
   refSsrData.current = ssrData;
   const app = (

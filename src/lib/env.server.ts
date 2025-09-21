@@ -26,7 +26,7 @@ const { error, data } = EnvSchema.safeParse(process.env);
 if (error) {
   for (const issue of error.issues) {
     console.error(
-      ["Env error:", issue.path.join("."), issue.message].join(" ")
+      ["Env error:", issue.path.join("."), issue.message].join(" "),
     );
   }
   process.exit(1);

@@ -1,4 +1,4 @@
-import { GlobeIcon } from "lucide-react";
+import { LanguagesIcon } from "lucide-react";
 import { useLocale } from "@/components/app/i18n/use-locale";
 import {
   DropdownMenu,
@@ -16,7 +16,7 @@ export default function LocaleSwitcher() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          <GlobeIcon />{" "}
+          <LanguagesIcon />{" "}
           {locales.find((localeItem) => localeItem.code === locale)?.name ||
             "English"}
         </Button>

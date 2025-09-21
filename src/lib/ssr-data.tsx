@@ -3,6 +3,7 @@ import type { Session } from "./types";
 import { isServer } from "./utils";
 
 export type SsrData = {
+  _memo: string;
   swrFallback: {
     todos?: DemoTodo[];
     session: Session;

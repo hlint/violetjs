@@ -16,4 +16,4 @@ FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/dist .
-CMD bun main.js
+CMD bun app.js

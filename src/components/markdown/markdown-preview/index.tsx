@@ -1,12 +1,12 @@
 import type { Element, Root, RootContent } from "hast";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-import rehypeKatex from "rehype-katex";
+// import rehypeKatex from "rehype-katex";
 import rehypeRewrite, { getCodeString } from "rehype-rewrite";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import "highlight.js/styles/github-dark.css";
-import "katex/dist/katex.min.css";
+// import "katex/dist/katex.min.css";
 import { cn } from "@/lib/utils";
 
 export default function MarkdownPreview({
@@ -21,13 +21,13 @@ export default function MarkdownPreview({
       className={cn(
         "w-full overflow-auto prose prose-md max-w-none",
         "prose-pre:p-0 prose-img:rounded-md prose-pre:rounded-lg prose-code:whitespace-pre-wrap prose-code:overflow-auto prose-code:text-primary",
-        className,
+        className
       )}
     >
       <Markdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[
-          rehypeKatex,
+          // rehypeKatex,
           [
             rehypeHighlight,
             {
@@ -40,7 +40,7 @@ export default function MarkdownPreview({
               rewrite: (
                 node: Root | RootContent,
                 _index: number | null,
-                _parent: Root | Element | null,
+                _parent: Root | Element | null
               ) => {
                 if (node.type === "element" && node.tagName === "pre") {
                   const codeElement = node.children[0];
@@ -53,7 +53,7 @@ export default function MarkdownPreview({
                     const language =
                       /language-(\w+)/.exec(className as string)?.[1] ?? "";
                     codeElement.children.unshift(
-                      codeHeader({ code, language }),
+                      codeHeader({ code, language })
                     );
                   }
                 }
@@ -62,11 +62,17 @@ export default function MarkdownPreview({
           ],
         ]}
         components={{
-          a: ({ node, ...props }) => (
-            <a {...props} target="_blank" rel="noopener noreferrer">
-              {props.children}
-            </a>
-          ),
+          a: ({ node, ...props }) => {
+            const isExternal = props.href?.startsWith("http");
+            if (isExternal) {
+              return (
+                <a {...props} target="_blank" rel="noopener noreferrer">
+                  {props.children}
+                </a>
+              );
+            }
+            return <a {...props}>{props.children}</a>;
+          },
           img: ({ node, src, ...props }) =>
             !src ? null : (
               <img {...props} src={src} alt={props.alt || "image"} />
@@ -129,7 +135,7 @@ function codeHeader({ code, language }: { code: string; language: string }) {
         const self =
           trigger.tagName === "svg" ? trigger : trigger.parentElement!;
         const elCopied = self.parentElement?.querySelector(
-          ".elCopied",
+          ".elCopied"
         ) as HTMLElement;
 
         self.classList.add("hidden");

@@ -18,6 +18,12 @@ async function build() {
   await fs.copy(".env.example", "dist/.env");
   await fs.copy("drizzle", "dist/drizzle");
   await fs.copy("public", "dist/public");
+  await fs.writeFile(
+    "dist/build-info.json",
+    JSON.stringify({
+      buildTime: new Date().toISOString(),
+    })
+  );
 }
 
 build();

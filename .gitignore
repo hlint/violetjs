@@ -26,3 +26,4 @@ runtime
 .env
 dist.zip
 docker-volumes
+dev-dist

@@ -9,14 +9,22 @@ export type SsrLoaderContext = {
 
 export default async function ssrLoader(
   url: string,
-  context: SsrLoaderContext,
+  context: SsrLoaderContext
 ): Promise<SsrData> {
   const osOptions = { context };
-  const ssrData: SsrData = { swrFallback: { session: context.session } };
   const urlObj = new URL(url, "http://localhost");
-  if (urlObj.pathname === "/demo/todo") {
+  const pathname = urlObj.pathname;
+  const ssrData: SsrData = {
+    _memo: `pathname: ${pathname}`,
+    swrFallback: { session: context.session },
+  };
+  if (pathname === "/") {
+    ssrData._memo = "page:home";
+  }
+  if (pathname === "/demo/todo") {
+    ssrData._memo = "page: demo/todo";
     ssrData.swrFallback.todos = await call(getTodos, null, osOptions).catch(
-      () => undefined,
+      () => undefined
     );
   }
   return ssrData;
