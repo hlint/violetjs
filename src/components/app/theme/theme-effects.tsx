@@ -1,20 +1,22 @@
 import { Helmet } from "@dr.pogodin/react-helmet";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { isServer } from "@/lib/utils";
 import { useThemeStore } from "@/store/_root";
 import { getPaletteStyles } from "./utils/get-palette-styles";
+
+const THEME_PALETTE_STYLE_STORAGE_KEY = "violet-ui-theme-palette-style";
 
 export function ThemeEffects() {
   const { isInitialized, palette, colorMode, isDark, setIsDark, initialize } =
     useThemeStore();
   useLayoutEffect(() => {
     initialize();
-  }, [initialize]);
-  useLayoutEffect(() => {
-    if (isInitialized) {
-      window.document.documentElement.style.opacity = "1";
+    // remove the initial style
+    const initialStyle = document.getElementById("theme-palette-initial-style");
+    if (initialStyle) {
+      initialStyle.remove();
     }
-  }, [isInitialized]);
+  }, [initialize]);
   useLayoutEffect(() => {
     if (!isInitialized) {
       return;
@@ -37,10 +39,19 @@ export function ThemeEffects() {
     };
   }, [isInitialized, colorMode, setIsDark]);
   useLayoutEffect(() => {
+    if (!isInitialized) {
+      return;
+    }
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(isDark ? "dark" : "light");
-  }, [isDark]);
+  }, [isInitialized, isDark]);
+  useEffect(() => {
+    localStorage.setItem(
+      THEME_PALETTE_STYLE_STORAGE_KEY,
+      getPaletteStyles(palette)
+    );
+  }, [palette]);
   if (isServer()) {
     return null;
   }

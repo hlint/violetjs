@@ -4,9 +4,9 @@ import type { StateCreator } from "zustand";
 import type { RootStoreState } from "./_root";
 
 const ThemeSchema = z.object({
-  colorMode: z.enum(["system", "light", "dark"]).default("dark"),
+  colorMode: z.enum(["system", "light", "dark"]).default("system"),
   isDark: z.boolean().default(true),
-  palette: z.string().default("cosmic-night"),
+  palette: z.string().default("default"),
 });
 export type Theme = z.infer<typeof ThemeSchema>;
 const THEME_STORAGE_KEY = "violet-ui-theme";
@@ -17,11 +17,14 @@ export type ThemeSlice = {
     isLoading: boolean;
     boundingClientRect: DOMRect | null;
     initialize: () => void;
-    refresh: () => void;
+    refresh: (skipAnimate?: boolean) => void;
     save: () => void;
-    setColorMode: (colorMode: Theme["colorMode"]) => void;
+    setColorMode: (
+      colorMode: Theme["colorMode"],
+      skipAnimate?: boolean
+    ) => void;
     toggleColorMode: () => void;
-    setIsDark: (isDark: boolean) => void;
+    setIsDark: (isDark: boolean, skipAnimate?: boolean) => void;
     setPalette: (palette: Theme["palette"]) => void;
     setBoundingClientRect: (boundingClientRect: DOMRect | null) => void;
     pageTransitionAnimation: (domUpdates: () => void) => void;
@@ -43,14 +46,14 @@ export const createThemeSlice: StateCreator<
       initialize: () => {
         const s = get().theme;
         if (!s.isLoading && !s.isInitialized) {
-          s.refresh();
+          s.refresh(true);
         }
       },
-      refresh: () => {
+      refresh: (skipAnimate = false) => {
         let theme = ThemeSchema.parse({});
         try {
           theme = ThemeSchema.parse(
-            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}"),
+            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}")
           );
         } catch (_error) {}
         set((d) => {
@@ -59,20 +62,20 @@ export const createThemeSlice: StateCreator<
           s.isLoading = false;
           s.palette = theme.palette;
         });
-        get().theme.setColorMode(theme.colorMode);
+        get().theme.setColorMode(theme.colorMode, skipAnimate);
       },
       save: () => {
         localStorage.setItem(
           THEME_STORAGE_KEY,
-          JSON.stringify(ThemeSchema.parse(get().theme)),
+          JSON.stringify(ThemeSchema.parse(get().theme))
         );
       },
-      setColorMode: (colorMode) => {
+      setColorMode: (colorMode, skipAnimate = false) => {
         set((d) => {
           d.theme.colorMode = colorMode;
         });
         if (colorMode !== "system") {
-          get().theme.setIsDark(colorMode === "dark");
+          get().theme.setIsDark(colorMode === "dark", skipAnimate);
         } else {
           get().theme.save();
         }
@@ -80,13 +83,20 @@ export const createThemeSlice: StateCreator<
       toggleColorMode: () => {
         get().theme.setColorMode(get().theme.isDark ? "light" : "dark");
       },
-      setIsDark: async (isDark) => {
-        get().theme.pageTransitionAnimation(() => {
+      setIsDark: async (isDark, skipAnimate = false) => {
+        const action = () => {
           set((d) => {
             d.theme.isDark = isDark;
           });
           get().theme.save();
-        });
+        };
+        if (!skipAnimate) {
+          get().theme.pageTransitionAnimation(() => {
+            action();
+          });
+        } else {
+          action();
+        }
       },
       setPalette: (palette) => {
         get().theme.pageTransitionAnimation(() => {
@@ -118,7 +128,7 @@ export const createThemeSlice: StateCreator<
           const bottom = window.innerHeight - top;
           const maxRad = Math.hypot(
             Math.max(left, right),
-            Math.max(top, bottom),
+            Math.max(top, bottom)
           );
 
           document.documentElement.animate(
@@ -132,7 +142,7 @@ export const createThemeSlice: StateCreator<
               duration: 700,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            },
+            }
           );
           set((d) => {
             d.theme.boundingClientRect = null;
@@ -146,7 +156,7 @@ export const createThemeSlice: StateCreator<
               duration: 300,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            },
+            }
           );
         }
       },
