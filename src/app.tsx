@@ -10,6 +10,7 @@ import ClientOnly from "./components/app/client-only";
 import AppErrorBoundary from "./components/app/error-boundary";
 import ErrorNotifier from "./components/app/error-notifier";
 import { DEFAULT_LANG, langs } from "./components/app/i18n/defines";
+import { Hreflangs } from "./components/app/i18n/hreflangs";
 import { I18nAppProvider } from "./components/app/i18n/i18n";
 import { ThemeEffects } from "./components/app/theme/theme-effects";
 import { SessionProvider } from "./hooks/use-session";
@@ -65,6 +66,7 @@ export default function App({
             <SessionProvider>
               <HelmetProvider context={helmetContext}>
                 <ThemeEffects />
+                <Hreflangs />
                 <Routes>
                   {langs.map((locale) => (
                     <Route

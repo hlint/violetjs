@@ -17,7 +17,7 @@ await prodInitialize();
 const port = env.PORT;
 
 // Cached production assets
-const templateHtml = await fs.readFile("./client/index.html", "utf-8");
+const templateHtml = await fs.readFile("./index.html", "utf-8");
 
 // Create http server
 const app = express();

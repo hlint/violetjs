@@ -4,7 +4,7 @@ import { useThemeStore } from "@/store/_root";
 export function useNavigateTransition() {
   const navigate = useNavigate();
   const pageTransitionAnimation = useThemeStore(
-    (s) => s.pageTransitionAnimation
+    (s) => s.pageTransitionAnimation,
   );
   return (to: To) => {
     pageTransitionAnimation(() => {

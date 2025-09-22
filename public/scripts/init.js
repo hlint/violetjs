@@ -25,7 +25,7 @@
   if (styleString) {
     document.head.insertAdjacentHTML(
       "beforeend",
-      `<style id="theme-palette-initial">${styleString}</style>`
+      `<style id="theme-palette-initial">${styleString}</style>`,
     );
   }
 })();

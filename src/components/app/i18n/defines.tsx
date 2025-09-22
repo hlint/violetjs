@@ -15,5 +15,5 @@ export const locales = [
 
 assert(
   langs.every((lang) => locales.some((locale) => locale.code === lang)),
-  "langs and locales must have the same values"
+  "langs and locales must have the same values",
 );

@@ -5,7 +5,7 @@ import {
 } from "../entry/utils/handle-ssr-html";
 
 export default async function ssgUpdate(urls: string[]) {
-  const htmlTemplatePath = "./client/index.html";
+  const htmlTemplatePath = "./index.html";
   if (!fs.existsSync(htmlTemplatePath)) {
     return;
   }

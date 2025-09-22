@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { MonitorSmartphoneIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
@@ -36,7 +37,9 @@ export function ButtonInstallPWA() {
           <MonitorSmartphoneIcon />
         </Button>
       </TooltipTrigger>
-      <TooltipContent>Install PWA</TooltipContent>
+      <TooltipContent>
+        <Trans>Install PWA</Trans>
+      </TooltipContent>
     </Tooltip>
   );
 }

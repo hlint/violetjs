@@ -100,7 +100,7 @@ function UserMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          <Avatar>
+          <Avatar className="size-6">
             <AvatarImage src={session.image} alt={session.username} />
           </Avatar>
           <span>{session.username}</span>

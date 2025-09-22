@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { MoonIcon, SunIcon, SunMoonIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,7 +39,9 @@ export function ThemeModeSwitcher() {
           {colorMode === "system" && <SunMoonIcon />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>Color Mode: {colorMode}</TooltipContent>
+      <TooltipContent>
+        <Trans>Color Mode</Trans>: {colorMode}
+      </TooltipContent>
     </Tooltip>
   );
 }

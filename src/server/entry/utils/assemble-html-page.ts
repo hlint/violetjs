@@ -19,7 +19,7 @@ export function assembleHtmlPage({
     .replace(
       `<!--app-html-->`,
       rendered +
-        `<script>window.__SSR_DATA__=${JSON.stringify(ssrData)}</script>`
+        `<script>window.__SSR_DATA__=${JSON.stringify(ssrData)}</script>`,
     );
 }
 

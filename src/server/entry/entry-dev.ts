@@ -31,7 +31,6 @@ handleExpress(app);
 app.use("*all", async (req, res) => {
   try {
     const url = req.originalUrl;
-
     let template = "";
     // Always read fresh template in development
     template = await fs.readFile("./index.html", "utf-8");

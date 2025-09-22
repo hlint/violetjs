@@ -29,7 +29,7 @@ msgstr "Add"
 msgid "Are you sure you want to sign out?"
 msgstr "Are you sure you want to sign out?"
 
-#: src/layouts/app-layout.tsx:67
+#: src/layouts/app-layout.tsx:70
 #: src/pages/demo/auth-required/index.tsx:15
 #: src/pages/demo/auth-required/index.tsx:18
 msgid "Auth Required"
@@ -39,6 +39,10 @@ msgstr "Auth Required"
 msgid "Back to Home"
 msgstr "Back to Home"
 
+#: src/components/app/theme/theme-mode-switcher.tsx:43
+msgid "Color Mode"
+msgstr "Color Mode"
+
 #: src/pages/auth/sign-in/index.tsx:29
 msgid "Continue with GitHub"
 msgstr "Continue with GitHub"
@@ -47,11 +51,11 @@ msgstr "Continue with GitHub"
 msgid "Continue with Google"
 msgstr "Continue with Google"
 
-#: src/layouts/app-layout.tsx:55
+#: src/layouts/app-layout.tsx:58
 msgid "Demo"
 msgstr "Demo"
 
-#: src/layouts/app-layout.tsx:72
+#: src/layouts/app-layout.tsx:75
 #: src/pages/demo/error-handling/index.tsx:23
 #: src/pages/demo/error-handling/index.tsx:26
 msgid "Error Handling"
@@ -65,28 +69,36 @@ msgstr "Error Handling Demo"
 msgid "Errors are handled by default, try this now:"
 msgstr "Errors are handled by default, try this now:"
 
-#: src/layouts/app-layout.tsx:49
+#: src/layouts/app-layout.tsx:52
 #: src/pages/home/index.tsx:13
 msgid "Home"
 msgstr "Home"
+
+#: src/components/app/button-install-pwa.tsx:41
+msgid "Install PWA"
+msgstr "Install PWA"
 
 #: src/components/app/error-fallback.tsx:9
 msgid "Oops, something went wrong..."
 msgstr "Oops, something went wrong..."
 
+#: src/components/app/theme/theme-palette-modal-switcher.tsx:35
+msgid "Palette"
+msgstr "Palette"
+
 #: src/components/app/error-fallback.tsx:12
 msgid "Please try again later or click <0>here</0> to reset."
 msgstr "Please try again later or click <0>here</0> to reset."
 
-#: src/components/app/error-fallback.tsx:13
-#~ msgid "Please try again later or click the button below to reset."
-#~ msgstr "Please try again later or click the button below to reset."
+#: src/components/app/theme/theme-palette-modal-switcher.tsx:52
+msgid "Select a palette to use for your application."
+msgstr "Select a palette to use for your application."
 
-#: src/components/app/error-fallback.tsx:18
-#~ msgid "Reset"
-#~ msgstr "Reset"
+#: src/components/app/theme/theme-palette-modal-switcher.tsx:49
+msgid "Select palette"
+msgstr "Select palette"
 
-#: src/layouts/app-layout.tsx:122
+#: src/layouts/app-layout.tsx:125
 #: src/pages/auth/sign-in/index.tsx:16
 msgid "Sign In"
 msgstr "Sign In"
@@ -95,13 +107,13 @@ msgstr "Sign In"
 msgid "Sign in to your account to continue."
 msgstr "Sign in to your account to continue."
 
-#: src/layouts/app-layout.tsx:114
+#: src/layouts/app-layout.tsx:117
 #: src/pages/auth/sign-out/index.tsx:15
 #: src/pages/auth/sign-out/index.tsx:25
 msgid "Sign Out"
 msgstr "Sign Out"
 
-#: src/layouts/app-layout.tsx:109
+#: src/layouts/app-layout.tsx:112
 msgid "Switch Account"
 msgstr "Switch Account"
 
@@ -126,7 +138,7 @@ msgstr "Throw a callback error"
 msgid "Throw a render error"
 msgstr "Throw a render error"
 
-#: src/layouts/app-layout.tsx:62
+#: src/layouts/app-layout.tsx:65
 #: src/pages/demo/todo/index.tsx:50
 #: src/pages/demo/todo/index.tsx:53
 msgid "Todo"

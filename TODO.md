@@ -2,6 +2,8 @@
   - [x] 基于路由的国际化
   - [x] 根路由自动跳转（服务端根据 Accept-Language 和 cookies 判断）
   - [x] SSG
+  - [x] hreflang 标签
+  - [ ] SSG 路由兼容 Lang
 - 尝试解决 puppeteer 的安装与打包单文件的冲突
-- Better SSG & ISR，记录缓存的更多信息以支持更好的缓存策略
-- biome 规则不严格一致，表现为编辑器和脚本的格式化结果有细微差异
+- Better SSG & ISR 的生成、更新，记录缓存的更多信息以支持更好的缓存策略
+- sitemap, robots.txt

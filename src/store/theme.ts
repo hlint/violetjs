@@ -14,14 +14,13 @@ const THEME_STORAGE_KEY = "violet-ui-theme";
 export type ThemeSlice = {
   theme: Theme & {
     isInitialized: boolean;
-    isLoading: boolean;
     boundingClientRect: DOMRect | null;
     initialize: () => void;
     refresh: (skipAnimate?: boolean) => void;
     save: () => void;
     setColorMode: (
       colorMode: Theme["colorMode"],
-      skipAnimate?: boolean
+      skipAnimate?: boolean,
     ) => void;
     toggleColorMode: () => void;
     setIsDark: (isDark: boolean, skipAnimate?: boolean) => void;
@@ -45,21 +44,22 @@ export const createThemeSlice: StateCreator<
       boundingClientRect: null,
       initialize: () => {
         const s = get().theme;
-        if (!s.isLoading && !s.isInitialized) {
+        if (!s.isInitialized) {
           s.refresh(true);
+          set((d) => {
+            d.theme.isInitialized = true;
+          });
         }
       },
       refresh: (skipAnimate = false) => {
         let theme = ThemeSchema.parse({});
         try {
           theme = ThemeSchema.parse(
-            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}")
+            JSON.parse(localStorage.getItem(THEME_STORAGE_KEY) || "{}"),
           );
         } catch (_error) {}
         set((d) => {
           const s = d.theme;
-          s.isInitialized = true;
-          s.isLoading = false;
           s.palette = theme.palette;
         });
         get().theme.setColorMode(theme.colorMode, skipAnimate);
@@ -67,7 +67,7 @@ export const createThemeSlice: StateCreator<
       save: () => {
         localStorage.setItem(
           THEME_STORAGE_KEY,
-          JSON.stringify(ThemeSchema.parse(get().theme))
+          JSON.stringify(ThemeSchema.parse(get().theme)),
         );
       },
       setColorMode: (colorMode, skipAnimate = false) => {
@@ -77,8 +77,12 @@ export const createThemeSlice: StateCreator<
         if (colorMode !== "system") {
           get().theme.setIsDark(colorMode === "dark", skipAnimate);
         } else {
-          get().theme.save();
+          get().theme.setIsDark(
+            window.matchMedia("(prefers-color-scheme: dark)").matches,
+            skipAnimate,
+          );
         }
+        get().theme.save();
       },
       toggleColorMode: () => {
         get().theme.setColorMode(get().theme.isDark ? "light" : "dark");
@@ -128,7 +132,7 @@ export const createThemeSlice: StateCreator<
           const bottom = window.innerHeight - top;
           const maxRad = Math.hypot(
             Math.max(left, right),
-            Math.max(top, bottom)
+            Math.max(top, bottom),
           );
 
           document.documentElement.animate(
@@ -142,7 +146,7 @@ export const createThemeSlice: StateCreator<
               duration: 700,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            }
+            },
           );
           set((d) => {
             d.theme.boundingClientRect = null;
@@ -156,7 +160,7 @@ export const createThemeSlice: StateCreator<
               duration: 300,
               easing: "ease-in-out",
               pseudoElement: "::view-transition-new(root)",
-            }
+            },
           );
         }
       },

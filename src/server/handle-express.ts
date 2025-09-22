@@ -73,7 +73,7 @@ export default function handleExpress(app: express.Express) {
           req.headers["accept-language"]?.replaceAll(";", ",").split(",")[0],
         ].filter(Boolean),
         langs,
-        DEFAULT_LANG
+        DEFAULT_LANG,
       );
     } catch (_error) {}
 

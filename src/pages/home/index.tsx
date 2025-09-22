@@ -15,7 +15,7 @@ export default function HomePage() {
         <MarkdownPreview
           text={text.replace(
             "[![banner](/public/banner.png)]",
-            "[![banner](/banner.png)]"
+            "[![banner](/banner.png)]",
           )}
         />
       </div>

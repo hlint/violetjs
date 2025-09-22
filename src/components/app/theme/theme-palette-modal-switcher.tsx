@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { PaletteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +31,9 @@ export function ThemePaletteModalSwitcher() {
             </Button>
           </DialogTrigger>
         </TooltipTrigger>
-        <TooltipContent>Palette: {palette}</TooltipContent>
+        <TooltipContent>
+          <Trans>Palette</Trans>: {palette}
+        </TooltipContent>
       </Tooltip>
       <ModalContent />
     </Dialog>
@@ -42,9 +45,11 @@ function ModalContent() {
   return (
     <DialogContent className="lg:max-w-3xl xl:max-w-5xl">
       <DialogHeader>
-        <DialogTitle>Select palette</DialogTitle>
+        <DialogTitle>
+          <Trans>Select palette</Trans>
+        </DialogTitle>
         <DialogDescription>
-          Select a palette to use for your application.
+          <Trans>Select a palette to use for your application.</Trans>
         </DialogDescription>
       </DialogHeader>
       <div className="p-1 hover-show-scroller grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-auto max-h-[calc(100vh-200px)]">

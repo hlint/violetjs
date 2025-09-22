@@ -10,7 +10,7 @@ export type SsrLoaderContext = {
 
 export default async function ssrLoader(
   url: string,
-  context: SsrLoaderContext
+  context: SsrLoaderContext,
 ): Promise<SsrData> {
   const osOptions = { context };
   const urlObj = new URL(url, "http://localhost");
@@ -26,7 +26,7 @@ export default async function ssrLoader(
   if (pathname === "/demo/todo") {
     ssrData._memo = "page: demo/todo";
     ssrData.swrFallback.todos = await call(getTodos, null, osOptions).catch(
-      () => undefined
+      () => undefined,
     );
   }
   return ssrData;
