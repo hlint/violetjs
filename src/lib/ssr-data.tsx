@@ -4,6 +4,7 @@ import { isServer } from "./utils";
 
 export type SsrData = {
   _memo: string;
+  lang: string;
   swrFallback: {
     todos?: DemoTodo[];
     session: Session;

@@ -1,8 +1,9 @@
 import { Trans } from "@lingui/react/macro";
 import { Outlet } from "react-router";
+import AppLink from "@/components/app/app-link";
 import { ButtonInstallPWA } from "@/components/app/button-install-pwa";
+import AppErrorBoundary from "@/components/app/error-boundary";
 import LocaleSwitcher from "@/components/app/i18n/locale-switcher";
-import { NavLinkTransition } from "@/components/app/navigate-transition";
 import { ThemeModeSwitcher } from "@/components/app/theme/theme-mode-switcher";
 import { ThemePaletteModalSwitcher } from "@/components/app/theme/theme-palette-modal-switcher";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -29,7 +30,9 @@ export default function AppLayout() {
     <main className="flex flex-col min-h-svh p-2">
       <NavMenu />
       <div className="flex-1 flex items-center justify-center">
-        <Outlet />
+        <AppErrorBoundary>
+          <Outlet />
+        </AppErrorBoundary>
       </div>
     </main>
   );
@@ -45,9 +48,9 @@ function NavMenu() {
               asChild
               className={navigationMenuTriggerStyle()}
             >
-              <NavLinkTransition to="/">
+              <AppLink to="/" animate>
                 <Trans>Home</Trans>
-              </NavLinkTransition>
+              </AppLink>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
@@ -58,19 +61,19 @@ function NavMenu() {
               <ul className="grid w-[200px] gap-4">
                 <li>
                   <NavigationMenuLink asChild>
-                    <NavLinkTransition to="/demo/todo">
+                    <AppLink to="/demo/todo">
                       <Trans>Todo</Trans>
-                    </NavLinkTransition>
+                    </AppLink>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <NavLinkTransition to="/demo/auth-required">
+                    <AppLink to="/demo/auth-required">
                       <Trans>Auth Required</Trans>
-                    </NavLinkTransition>
+                    </AppLink>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <NavLinkTransition to="/demo/error-handling">
+                    <AppLink to="/demo/error-handling">
                       <Trans>Error Handling</Trans>
-                    </NavLinkTransition>
+                    </AppLink>
                   </NavigationMenuLink>
                 </li>
               </ul>
@@ -105,22 +108,22 @@ function UserMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <a href="/auth/sign-in">
+          <AppLink to="/auth/sign-in">
             <Trans>Switch Account</Trans>
-          </a>
+          </AppLink>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <a href="/auth/sign-out">
+          <AppLink to="/auth/sign-out">
             <Trans>Sign Out</Trans>
-          </a>
+          </AppLink>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (
     <Button variant="ghost">
-      <a href="/auth/sign-in">
+      <AppLink to="/auth/sign-in">
         <Trans>Sign In</Trans>
-      </a>
+      </AppLink>
     </Button>
   );
 }

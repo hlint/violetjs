@@ -1,59 +1,34 @@
-import { match } from "@formatjs/intl-localematcher";
-import type { I18n } from "@lingui/core";
-import {
-  detect,
-  fromNavigator,
-  fromStorage,
-  fromUrl,
-} from "@lingui/detect-locale";
-import { useLingui } from "@lingui/react";
-import { createContext, useContext, useLayoutEffect, useState } from "react";
-import { locales } from "./defines";
+import { i18n } from "@lingui/core";
+import Cookies from "js-cookie";
+import { createContext, useContext, useLayoutEffect, useMemo } from "react";
+import { useLocation } from "react-router";
+import { parseLangFromUrl } from "./utils";
 
-const LOCALE_STORAGE_KEY = "violet-ui-lang";
-
-const Context = createContext<{
-  i18n: I18n;
+export interface LocaleData {
   locale: string;
-  setLocale: (locale: string) => void;
-}>({} as any);
+  path: string;
+}
+const Context = createContext<LocaleData>(null as any);
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState("en");
-  const { i18n } = useLingui();
-  useLayoutEffect(() => {
-    const userLocales = detect(
-      fromUrl("lang"),
-      fromStorage(LOCALE_STORAGE_KEY),
-      fromNavigator(),
-      () => "en",
-    );
-    if (userLocales) {
-      const matched = match(
-        [userLocales],
-        locales.map((locale) => locale.code),
-        "en",
-      );
-      setLocale(matched);
-    }
-  }, []);
+  const { pathname, search, hash } = useLocation();
+  const localeData = useMemo(() => {
+    const lang = parseLangFromUrl(pathname);
+    const pathnameFixed = pathname.startsWith(`/${lang}`)
+      ? pathname.replace(`/${lang}`, "")
+      : pathname;
+    return {
+      locale: lang,
+      path: [pathnameFixed, search, hash].join(""),
+    };
+  }, [pathname, search, hash]);
+  const { locale } = localeData;
   useLayoutEffect(() => {
     i18n.activate(locale);
-  }, [locale, i18n]);
-  return (
-    <Context.Provider
-      value={{
-        i18n,
-        locale,
-        setLocale: (locale) => {
-          setLocale(locale);
-          localStorage.setItem(LOCALE_STORAGE_KEY, locale);
-        },
-      }}
-    >
-      {children}
-    </Context.Provider>
-  );
+    document.documentElement.lang = locale;
+    Cookies.set("violet-ui-lang", locale);
+  }, [locale]);
+  return <Context.Provider value={localeData}>{children}</Context.Provider>;
 }
 
 export function useLocale() {

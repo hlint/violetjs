@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/404/index.tsx:8
+msgid "404 Not Found"
+msgstr "404 页面未找到"
+
 #: src/pages/demo/todo/index.tsx:56
 msgid "A simple todo demo with ssr, orpc, swr anddrizzle."
 msgstr "一个使用 ssr、orpc、swr 和 drizzle 的简单待办事项演示。"
@@ -25,13 +29,13 @@ msgstr "添加"
 msgid "Are you sure you want to sign out?"
 msgstr "您确定要退出登录吗？"
 
-#: src/layouts/app-layout.tsx:66
+#: src/layouts/app-layout.tsx:67
 #: src/pages/demo/auth-required/index.tsx:15
 #: src/pages/demo/auth-required/index.tsx:18
 msgid "Auth Required"
 msgstr "身份认证"
 
-#: src/pages/auth/_components/back-to-home.tsx:9
+#: src/pages/auth/_components/back-to-home.tsx:14
 msgid "Back to Home"
 msgstr "返回首页"
 
@@ -43,11 +47,11 @@ msgstr "使用 GitHub 继续"
 msgid "Continue with Google"
 msgstr "使用 Google 继续"
 
-#: src/layouts/app-layout.tsx:54
+#: src/layouts/app-layout.tsx:55
 msgid "Demo"
 msgstr "演示"
 
-#: src/layouts/app-layout.tsx:71
+#: src/layouts/app-layout.tsx:72
 #: src/pages/demo/error-handling/index.tsx:23
 #: src/pages/demo/error-handling/index.tsx:26
 msgid "Error Handling"
@@ -61,12 +65,28 @@ msgstr "错误处理演示"
 msgid "Errors are handled by default, try this now:"
 msgstr "错误默认会被处理，试试这个："
 
-#: src/layouts/app-layout.tsx:48
-#: src/pages/home/index.tsx:9
+#: src/layouts/app-layout.tsx:49
+#: src/pages/home/index.tsx:13
 msgid "Home"
 msgstr "首页"
 
-#: src/layouts/app-layout.tsx:120
+#: src/components/app/error-fallback.tsx:9
+msgid "Oops, something went wrong..."
+msgstr "哎呀，出了点问题..."
+
+#: src/components/app/error-fallback.tsx:12
+msgid "Please try again later or click <0>here</0> to reset."
+msgstr "请稍后再试，或点击<0>这里</0>重置。"
+
+#: src/components/app/error-fallback.tsx:13
+#~ msgid "Please try again later or click the button below to reset."
+#~ msgstr "请稍后再试，或点击下方按钮重置。"
+
+#: src/components/app/error-fallback.tsx:18
+#~ msgid "Reset"
+#~ msgstr "重置"
+
+#: src/layouts/app-layout.tsx:122
 #: src/pages/auth/sign-in/index.tsx:16
 msgid "Sign In"
 msgstr "登录"
@@ -75,15 +95,19 @@ msgstr "登录"
 msgid "Sign in to your account to continue."
 msgstr "登录您的账户以继续。"
 
-#: src/layouts/app-layout.tsx:112
+#: src/layouts/app-layout.tsx:114
 #: src/pages/auth/sign-out/index.tsx:15
 #: src/pages/auth/sign-out/index.tsx:25
 msgid "Sign Out"
 msgstr "登出"
 
-#: src/layouts/app-layout.tsx:107
+#: src/layouts/app-layout.tsx:109
 msgid "Switch Account"
 msgstr "切换账号"
+
+#: src/pages/404/index.tsx:11
+msgid "The page you are looking for does not exist. Please try again later or click <0>here</0> to go back to the home page."
+msgstr "您要查找的页面不存在。请稍后再试，或点击<0>这里</0>返回首页。"
 
 #: src/pages/demo/auth-required/index.tsx:21
 msgid "This page is protected by auth guard"
@@ -102,7 +126,7 @@ msgstr "抛出回调错误"
 msgid "Throw a render error"
 msgstr "抛出渲染错误"
 
-#: src/layouts/app-layout.tsx:61
+#: src/layouts/app-layout.tsx:62
 #: src/pages/demo/todo/index.tsx:50
 #: src/pages/demo/todo/index.tsx:53
 msgid "Todo"

@@ -1,6 +1,8 @@
 [![banner](/public/banner.png)](https://github.com/hlint/violetjs)
 
-VioletJS is a modern full-stack React framework powered by Vite, featuring SSR/SSG support with built-in database, authentication, type-safe APIs, and comprehensive tooling.
+English | [中文](https://github.com/hlint/violetjs/blob/main/README.zh-CN.md)
+
+[VioletJS](https://github.com/hlint/violetjs) is a modern full-stack React framework powered by Vite, featuring SSR/SSG support with built-in database, authentication, type-safe APIs, and comprehensive tooling.
 
 ## 📑 Table of Contents
 
@@ -8,11 +10,6 @@ VioletJS is a modern full-stack React framework powered by Vite, featuring SSR/S
 - [Quick Start](#-quick-start)
 - [Documentation](#-documentation)
 - [Why VioletJS?](#-why-violetjs)
-  - [The Motivation](#-the-motivation)
-  - [Simple & Transparent](#-simple--transparent)
-  - [Straightforward SSR](#-straightforward-ssr)
-  - [Flexible SSG](#-flexible-ssg)
-  - [SPA-Friendly](#-spa-friendly)
 - [Contributing](#-contributing)
 - [License & Support](#-license--support)
 - [Acknowledgments](#-acknowledgments)

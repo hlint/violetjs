@@ -33,6 +33,7 @@ export async function handleSsrHtml({
     rendered,
     ssrData,
     helmetContext,
+    lang: ssrData.lang,
   });
   return html;
 }

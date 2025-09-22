@@ -1,5 +1,5 @@
 import { LanguagesIcon } from "lucide-react";
-import { useLocale } from "@/components/app/i18n/use-locale";
+import { useNavigate } from "react-router";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,23 +9,26 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "../../ui/button";
 import { locales } from "./defines";
+import { useLocale } from "./use-locale";
 
 export default function LocaleSwitcher() {
-  const { locale, setLocale } = useLocale();
+  const { locale, path } = useLocale();
+  const navigate = useNavigate();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
           <LanguagesIcon />{" "}
-          {locales.find((localeItem) => localeItem.code === locale)?.name ||
-            "English"}
+          {locales.find((localeItem) => localeItem.code === locale)?.name}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {locales.map((localeItem) => (
           <DropdownMenuItem
             key={localeItem.code}
-            onClick={() => setLocale(localeItem.code)}
+            onClick={() => {
+              navigate(`/${localeItem.code}${path}`);
+            }}
             className={cn(localeItem.code === locale && "text-primary")}
           >
             {localeItem.name}

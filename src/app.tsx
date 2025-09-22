@@ -3,12 +3,13 @@ import {
   type HelmetDataContext,
   HelmetProvider,
 } from "@dr.pogodin/react-helmet";
-import { ErrorBoundary } from "react-error-boundary";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import { Toaster } from "sonner";
 import { SWRConfig } from "swr";
-import ErrorFallback from "./components/app/error-fallback";
+import ClientOnly from "./components/app/client-only";
+import AppErrorBoundary from "./components/app/error-boundary";
 import ErrorNotifier from "./components/app/error-notifier";
+import { DEFAULT_LANG, langs } from "./components/app/i18n/defines";
 import { I18nAppProvider } from "./components/app/i18n/i18n";
 import { ThemeEffects } from "./components/app/theme/theme-effects";
 import { SessionProvider } from "./hooks/use-session";
@@ -31,47 +32,66 @@ export default function App({
 }: {
   helmetContext?: HelmetDataContext;
 }) {
+  const appRoutes = (
+    <>
+      <Route path="auth" element={<AuthLayout />}>
+        <Route path="sign-in" element={<SignInPage />} />
+        <Route path="sign-out" element={<SignOutPage />} />
+      </Route>
+      <Route path="*" element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="demo">
+          <Route path="todo" element={<TodoPage />} />
+          <Route path="auth-required" element={<SignInGuard />}>
+            <Route index element={<AuthRequiredPage />} />
+          </Route>
+          <Route path="error-handling" element={<ErrorHandlingPage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </>
+  );
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Toaster position="top-center" />
-      <ErrorNotifier />
-      <SWRConfig
-        value={{
-          fallback: getSsrData()?.swrFallback,
-        }}
-      >
-        <I18nAppProvider>
+    <I18nAppProvider>
+      <AppErrorBoundary>
+        <Toaster position="top-center" />
+        <ErrorNotifier />
+        <SWRConfig
+          value={{
+            fallback: getSsrData()?.swrFallback,
+          }}
+        >
           <RootStoreProvider>
             <SessionProvider>
               <HelmetProvider context={helmetContext}>
                 <ThemeEffects />
                 <Routes>
-                  <Route path="*" element={<RootLayout />}>
-                    <Route path="auth" element={<AuthLayout />}>
-                      <Route path="sign-in" element={<SignInPage />} />
-                      <Route path="sign-out" element={<SignOutPage />} />
+                  {langs.map((locale) => (
+                    <Route
+                      key={locale}
+                      path={`/${locale}`}
+                      element={<RootLayout />}
+                    >
+                      {appRoutes}
                     </Route>
-                    <Route path="*" element={<AppLayout />}>
-                      <Route index element={<HomePage />} />
-                      <Route path="demo">
-                        <Route path="todo" element={<TodoPage />} />
-                        <Route path="auth-required" element={<SignInGuard />}>
-                          <Route index element={<AuthRequiredPage />} />
-                        </Route>
-                        <Route
-                          path="error-handling"
-                          element={<ErrorHandlingPage />}
-                        />
-                      </Route>
-                      <Route path="*" element={<NotFoundPage />} />
-                    </Route>
-                  </Route>
+                  ))}
+                  <Route
+                    path="*"
+                    element={
+                      <>
+                        <ClientOnly>
+                          <Navigate to={`/${DEFAULT_LANG}`} />
+                        </ClientOnly>
+                        <NotFoundPage />
+                      </>
+                    }
+                  />
                 </Routes>
               </HelmetProvider>
             </SessionProvider>
           </RootStoreProvider>
-        </I18nAppProvider>
-      </SWRConfig>
-    </ErrorBoundary>
+        </SWRConfig>
+      </AppErrorBoundary>
+    </I18nAppProvider>
   );
 }

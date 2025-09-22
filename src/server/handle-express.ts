@@ -1,7 +1,9 @@
 import { ExpressAuth, getSession } from "@auth/express";
+import { match } from "@formatjs/intl-localematcher";
 import { RPCHandler } from "@orpc/server/node";
 import cookieParser from "cookie-parser";
 import express from "express";
+import { DEFAULT_LANG, langs } from "@/components/app/i18n/defines.tsx";
 import type { OsContext } from "../lib/orpc-client.ts";
 import type { Session } from "../lib/types.ts";
 import { authConfig } from "./auth.ts";
@@ -24,15 +26,7 @@ export default function handleExpress(app: express.Express) {
 
   // handle auth
   app.use("/auth", async (req, res, next) => {
-    if (
-      // custom auth pages
-      req.originalUrl.startsWith("/auth/sign-in") ||
-      req.originalUrl.startsWith("/auth/sign-out")
-    ) {
-      return next();
-    } else {
-      ExpressAuth(authConfig)(req, res, next);
-    }
+    ExpressAuth(authConfig)(req, res, next);
   });
 
   // handle oRPC
@@ -67,5 +61,22 @@ export default function handleExpress(app: express.Express) {
   app.use(async (_req, _res, next) => {
     // res.locals.themeColorMode = req.cookies[storageKeyColorMode];
     return next();
+  });
+
+  // redirect to the correct language
+  app.get("/", async (req, res) => {
+    let lang = DEFAULT_LANG;
+    try {
+      lang = match(
+        [
+          req.cookies["violet-ui-lang"],
+          req.headers["accept-language"]?.replaceAll(";", ",").split(",")[0],
+        ].filter(Boolean),
+        langs,
+        DEFAULT_LANG
+      );
+    } catch (_error) {}
+
+    return res.redirect(`/${lang}`);
   });
 }

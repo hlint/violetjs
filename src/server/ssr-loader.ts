@@ -1,4 +1,5 @@
 import { call } from "@orpc/server";
+import { parseLangFromUrl } from "@/components/app/i18n/utils";
 import type { Session } from "@/lib/types";
 import { getTodos } from "@/pages/demo/todo/actions.server";
 import type { SsrData } from "../lib/ssr-data";
@@ -16,6 +17,7 @@ export default async function ssrLoader(
   const pathname = urlObj.pathname;
   const ssrData: SsrData = {
     _memo: `pathname: ${pathname}`,
+    lang: parseLangFromUrl(url),
     swrFallback: { session: context.session },
   };
   if (pathname === "/") {

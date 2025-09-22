@@ -1,13 +1,18 @@
 import { Trans } from "@lingui/react/macro";
-import { Link } from "react-router";
+import AppLink from "@/components/app/app-link";
 import { Button } from "@/components/ui/button";
 
 export default function BackToHome() {
   return (
-    <Button variant="outline" className="w-full" type="button" asChild>
-      <Link to="/">
+    <Button
+      variant="outline"
+      className="w-full no-underline"
+      type="button"
+      asChild
+    >
+      <AppLink to="/">
         <Trans>Back to Home</Trans>
-      </Link>
+      </AppLink>
     </Button>
   );
 }

@@ -5,13 +5,16 @@ export function assembleHtmlPage({
   rendered,
   ssrData,
   helmetContext,
+  lang,
 }: {
   template: string;
   rendered: string;
   ssrData: any;
   helmetContext: HelmetDataContext;
+  lang: string;
 }) {
   return template
+    .replace(`--app-lang--`, lang)
     .replace(`<!--app-head-->`, getHead(helmetContext))
     .replace(
       `<!--app-html-->`,
