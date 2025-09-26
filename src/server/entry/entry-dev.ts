@@ -1,6 +1,6 @@
-import fs from "node:fs/promises";
 import http from "node:http";
 import express from "express";
+import fs from "fs-extra";
 import dbInitialize from "@/db/initialize.ts";
 import { env } from "@/lib/env.server.ts";
 import handleExpress from "../handle-express.ts";

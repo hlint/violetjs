@@ -95,6 +95,7 @@
     "numbro": "^2.5.0",
     "nuqs": "^2.4.3",
     "open": "^10.2.0",
+    "p-limit": "^7.1.1",
     "react": "^19.1.1",
     "react-day-picker": "^9.8.1",
     "react-dom": "^19.1.1",

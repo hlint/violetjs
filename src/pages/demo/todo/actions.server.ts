@@ -4,10 +4,10 @@ import { z } from "zod";
 import { db } from "@/db/db";
 import { demoTodosTable } from "@/db/schema";
 import { osBase } from "@/lib/orpc-client";
-import ssgUpdate from "@/server/ssg/ssg-update";
+import updatePageCaches from "@/server/page-generation/update-page-caches";
 
 function updateTodoSsg() {
-  ssgUpdate(["/demo/todo"]);
+  updatePageCaches(["/demo/todo"]);
 }
 
 export const getTodos = osBase.handler(async () => {

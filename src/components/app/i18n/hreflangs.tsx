@@ -3,7 +3,7 @@ import { DEFAULT_LANG, langs } from "./defines";
 import { useLocale } from "./use-locale";
 
 export function Hreflangs() {
-  const { path } = useLocale();
+  const { fullpath: path } = useLocale();
   return (
     <Helmet>
       <link

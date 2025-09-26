@@ -1,0 +1,138 @@
+---
+description: "VioletJS project development rules and best practices"
+globs:
+alwaysApply: true
+---
+
+# VioletJS Project Rules
+
+## Code Style
+
+### TypeScript
+
+- Use TypeScript for all new files
+- Prefer functional components
+- Use strict typing, avoid `any`
+- Prefer interfaces over type aliases
+- Use generics for code reusability
+
+### React Components
+
+- Use functional components and Hooks
+- Use `React.memo` for performance
+- Use `useMemo` and `useCallback` to prevent unnecessary re-renders
+- Component names in PascalCase
+- File names in kebab-case
+
+### File Organization
+
+- Components in `src/components/`
+- Pages in `src/pages/`
+- Utils in `src/utils/`
+- Types in `src/types/`
+
+## Version Control
+
+- When generating commit message, make it short and concise as a list.
+
+## VioletJS Specific
+
+### SSR/SSG Development
+
+- Use `ssrLoader` for server-side data loading
+- Handle `getSsrData()` return values properly
+- Use `ssgUpdate()` for static page cache updates
+- Ensure server-client rendering consistency
+
+### Routing
+
+- Define server routes in `src/routes-server.tsx`
+- Follow VioletJS routing conventions
+- Handle dynamic route parameters correctly
+
+### Database
+
+- Use Drizzle ORM for database operations
+- Define schemas in `src/db/`
+- Use type-safe query methods
+
+### API Development
+
+- Use oRPC for type-safe APIs
+- Define API routes in `src/api/`
+- Use Zod for input validation
+- Handle errors properly
+
+## Performance
+
+### Rendering Optimization
+
+- Wrap pure components with `React.memo`
+- Avoid creating new objects in render
+- Use `useMemo` for expensive calculations
+- Use `useCallback` for event handlers
+
+### Loading Optimization
+
+- Implement proper loading states
+- Use SWR for data caching
+
+## Internationalization
+
+### Lingui Usage
+
+- Use `t` macro for text translation
+- Run `bun run i18n:extract` to extract strings
+- Manage translation files (\*.po) in `src/locales/`, fix the translation strings, and clean up unused translation strings
+- Run `bun run i18n:compile` to compile translations
+
+## UI & Styling
+
+### Tailwind CSS
+
+- Prefer Tailwind utility classes
+- Use `cn()` function for class merging
+- Follow responsive design principles
+
+### Radix UI
+
+- Use Radix UI as base components
+- Customize through `src/components/ui/`
+- Maintain accessibility standards
+
+## Testing
+
+### Test Strategy
+
+- Write unit tests for components
+- Write integration tests for API routes
+- Use Vitest as testing framework
+
+## Code Quality
+
+### Code Review
+
+- Keep functions simple and focused
+- Use meaningful variable and function names
+- Add necessary comments and documentation
+- Follow DRY principles
+
+### Error Handling
+
+- Use Error Boundary for component errors
+- Handle and return errors properly in APIs
+- Use appropriate logging
+
+## Build & Deploy
+
+### Build Optimization
+
+- Use `bun run build` for production builds
+- Ensure optimized build artifacts
+- Use Docker for containerized deployment
+
+### Environment Configuration
+
+- Use `.env` files for environment variables
+- Distinguish between dev/test/prod environments
+- Use type-safe environment variable access

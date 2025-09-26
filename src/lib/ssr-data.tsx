@@ -1,15 +1,12 @@
-import type { DemoTodo } from "@/db/schema";
 import type { Session } from "./types";
 import { isServer } from "./utils";
 
 export type SsrData = {
-  _memo: string;
   lang: string;
   swrFallback: {
-    todos?: DemoTodo[];
     session: Session;
-  };
-};
+  } & Record<string, unknown>;
+} & Record<string, unknown>;
 
 export const refSsrData = {
   current: {} as SsrData | undefined,

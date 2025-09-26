@@ -1,6 +1,6 @@
 import type { HelmetDataContext } from "@dr.pogodin/react-helmet";
 import type { Session } from "../../../lib/types.ts";
-import ssrLoader, { type SsrLoaderContext } from "../../ssr-loader.ts";
+import ssrLoader, { type SsrLoaderInputs } from "../../ssr-loader.ts";
 import { assembleHtmlPage } from "./assemble-html-page.ts";
 
 type CompiledServerRender =
@@ -22,10 +22,10 @@ export async function handleSsrHtml({
   template: string;
   render: CompiledServerRender;
 }) {
-  const context = {
+  const inputs = {
     session: resLocals.session as Session,
-  } satisfies SsrLoaderContext;
-  const ssrData = await ssrLoader(url, context);
+  } satisfies SsrLoaderInputs;
+  const ssrData = await ssrLoader(url, inputs);
   const helmetContext: HelmetDataContext = {};
   const rendered = render(url, ssrData, helmetContext);
   const html = assembleHtmlPage({

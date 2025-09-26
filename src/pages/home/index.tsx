@@ -6,7 +6,7 @@ import README from "../../../README.md?raw";
 import README_zh_CN from "../../../README.zh-CN.md?raw";
 
 export default function HomePage() {
-  const { locale } = useLocale();
+  const { lang: locale } = useLocale();
   const text = locale === "zh-CN" ? README_zh_CN : README;
   return (
     <div>

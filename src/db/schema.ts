@@ -8,3 +8,17 @@ export const demoTodosTable = sqliteTable("demo_todos", {
 
 export type DemoTodo = typeof demoTodosTable.$inferSelect;
 export type DemoTodoInsert = typeof demoTodosTable.$inferInsert;
+
+export const demoPostsTable = sqliteTable("demo_posts", {
+  id: int().primaryKey({ autoIncrement: true }),
+  title: text().notNull(),
+  content: text().notNull(),
+  createdAt: text()
+    .notNull()
+    .$default(() => {
+      return new Date().toISOString();
+    }),
+});
+
+export type DemoPost = typeof demoPostsTable.$inferSelect;
+export type DemoPostInsert = typeof demoPostsTable.$inferInsert;

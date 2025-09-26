@@ -1,4 +1,5 @@
 import http from "node:http";
+import compression from "compression";
 import express from "express";
 import fs from "fs-extra";
 import open from "open";
@@ -10,6 +11,7 @@ import {
   handleSsrHtml,
 } from "./utils/handle-ssr-html.ts";
 import prodInitialize from "./utils/prod-initialize.ts";
+import { middlewarePageCache } from "../page-generation/middleware-page-cache.ts";
 
 await prodInitialize();
 
@@ -23,12 +25,11 @@ const templateHtml = await fs.readFile("./index.html", "utf-8");
 const app = express();
 const server = http.createServer(app);
 
-const compression = (await import("compression")).default;
 app.use(compression());
-await fs.ensureDir("./runtime/ssg");
-app.use("/", sirv("./runtime/ssg", { extensions: ["html"] }));
+
 app.use("/", sirv("./client", { extensions: ["html"] }));
 app.use("/", sirv("./public", { extensions: ["html"] }));
+app.use(middlewarePageCache);
 
 handleExpress(app);
 

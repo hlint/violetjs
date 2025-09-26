@@ -25,7 +25,7 @@ export default function TodoPage() {
     isLoading,
     isValidating,
     mutate,
-  } = useSWR("todos", orpc.demo.todo.getTodos);
+  } = useSWR("/demo/todo", orpc.demo.todo.getTodos);
   if (!todos) {
     return null;
   }
@@ -53,7 +53,7 @@ export default function TodoPage() {
           <Trans>Todo</Trans>
         </CardTitle>
         <CardDescription>
-          <Trans>A simple todo demo with ssr, orpc, swr anddrizzle.</Trans>
+          <Trans>A simple todo demo with ssr, orpc, swr and drizzle.</Trans>
         </CardDescription>
         <CardAction>
           <Button
@@ -111,7 +111,7 @@ export default function TodoPage() {
 function FormAddTodo({ todos }: { todos: DemoTodo[] }) {
   const { mutate } = useSWRConfig();
   const handleAddTodo = (title: string) => {
-    mutate("todos", orpc.demo.todo.addTodo({ title }), {
+    mutate("/demo/todo", orpc.demo.todo.addTodo({ title }), {
       populateCache: false,
       optimisticData: [
         ...todos,

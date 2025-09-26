@@ -12,7 +12,7 @@ import { locales } from "./defines";
 import { useLocale } from "./use-locale";
 
 export default function LocaleSwitcher() {
-  const { locale, path } = useLocale();
+  const { lang: locale, fullpath: path } = useLocale();
   const navigate = useNavigate();
   return (
     <DropdownMenu>

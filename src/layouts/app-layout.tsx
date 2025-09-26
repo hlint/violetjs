@@ -66,6 +66,11 @@ function NavMenu() {
                     </AppLink>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
+                    <AppLink to="/demo/post/list">
+                      <Trans>Post</Trans>
+                    </AppLink>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
                     <AppLink to="/demo/auth-required">
                       <Trans>Auth Required</Trans>
                     </AppLink>

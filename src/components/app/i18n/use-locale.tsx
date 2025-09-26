@@ -5,8 +5,9 @@ import { useLocation } from "react-router";
 import { parseLangFromUrl } from "./utils";
 
 export interface LocaleData {
-  locale: string;
-  path: string;
+  lang: string;
+  fullpath: string;
+  mainpath: string;
 }
 const Context = createContext<LocaleData>(null as any);
 
@@ -14,20 +15,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const { pathname, search, hash } = useLocation();
   const localeData = useMemo(() => {
     const lang = parseLangFromUrl(pathname);
-    const pathnameFixed = pathname.startsWith(`/${lang}`)
-      ? pathname.replace(`/${lang}`, "")
-      : pathname;
+    const mainpath = pathname.replace(/^\/[^/]+/, "");
     return {
-      locale: lang,
-      path: [pathnameFixed, search, hash].join(""),
+      lang,
+      mainpath,
+      fullpath: [mainpath, search, hash].join(""),
     };
   }, [pathname, search, hash]);
-  const { locale } = localeData;
+  const { lang } = localeData;
   useLayoutEffect(() => {
-    i18n.activate(locale);
-    document.documentElement.lang = locale;
-    Cookies.set("violet-ui-lang", locale);
-  }, [locale]);
+    i18n.activate(lang);
+    document.documentElement.lang = lang;
+    Cookies.set("violet-ui-lang", lang);
+  }, [lang]);
   return <Context.Provider value={localeData}>{children}</Context.Provider>;
 }
 

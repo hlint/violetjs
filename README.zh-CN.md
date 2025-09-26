@@ -16,7 +16,7 @@
 
 ## 🎉 特性
 
-- **全栈框架**：支持 SSR、SSG、SPA，基于 Express + Vite
+- **全栈框架**：支持 SSR、SSG、ISR、SPA，基于 Express + Vite
 - **运行时**：Bun（快速的 JavaScript 运行时）
 - **数据库**：Drizzle ORM + SQLite
 - **身份验证**：Auth.js
@@ -64,55 +64,58 @@ bun dev
 
 ### ⚡ 直观的 SSR
 
-简单的数据准备 → React 组件渲染：
+基于路由的服务器端数据加载，支持路由嵌套和中间件模式：
 
 ```js
-export default async function ssrLoader(url, context) {
-  const ssrData = {};
-  const user = context.user;
-  ssrData.user = user;
-
-  if (url === "/post/list") {
-    const list = await getPostList();
-    ssrData.postList = list;
-  }
-
-  return ssrData;
+// src/routes-server.tsx
+{
+  path: "post/list",
+  ssrHandle: async ({ ssrData }) => {
+    ssrData.swrFallback["/post/list"] = await call(getPosts, null);
+  },
 }
 ```
 
-### 🔄 灵活的 SSG
+### 🔄 灵活的 SSG 和 ISR
 
-按需生成静态页面，支持手动缓存更新：
+自动生成静态页面，支持按需更新：
 
 ```js
-export function getPostList() {
-  // 获取数据逻辑
+// src/routes-server.tsx
+{
+  path: "post/:post_id",
+  ssg: true,
+  isr: true,
 }
 
-export function updatePost(id, title, content) {
-  // 更新逻辑
-  ssgUpdate(["/post/list"]);
+// 数据更新后重新生成静态页面
+function updatePost(id, title, content) {
+  // 更新数据...
+  updatePageCaches(["/post/list", `/post/${id}`]);
 }
 ```
 
-### 🔗 SPA 友好
+### 🔗 使用 SWR 管理数据
 
-使用标准的 React 模式，配合浏览器路由和状态管理。优雅地处理缺失的 `ssrData`：
+使用 SWR 进行数据获取，自动处理 SSR 数据和客户端缓存：
 
 ```jsx
-import { useEffect } from "react";
+import useSWR from "swr";
+import { orpc } from "@/lib/orpc-client";
 
-export default function MyApp() {
-  const [postList, setPostList] = useState(getSsrData()?.postList);
+export default function PostListPage() {
+  const { data: posts, mutate } = useSWR(
+    "/demo/post/list",
+    orpc.demo.post.getPosts
+  );
 
-  useEffect(() => {
-    if (!postList) {
-      getPostList().then(setPostList);
-    }
-  }, [postList]);
-
-  return <PostListComponent postList={postList || []} />;
+  return (
+    <div>
+      {posts?.map((post) => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  );
 }
 ```
 

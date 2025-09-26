@@ -1,4 +1,11 @@
 import {
+  addPost,
+  getPost,
+  getPosts,
+  removePost,
+  updatePost,
+} from "@/pages/demo/post/actions.server";
+import {
   addTodo,
   getTodos,
   removeTodo,
@@ -11,6 +18,13 @@ export const orpcRouter = {
     getSession,
   },
   demo: {
+    post: {
+      getPost,
+      getPosts,
+      addPost,
+      removePost,
+      updatePost,
+    },
     todo: {
       getTodos,
       addTodo,

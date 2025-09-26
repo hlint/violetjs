@@ -16,7 +16,7 @@ English | [中文](https://github.com/hlint/violetjs/blob/main/README.zh-CN.md)
 
 ## 🎉 Features
 
-- **Full-Stack**: SSR, SSG, SPA with Express + Vite
+- **Full-Stack**: SSR, SSG, ISR, SPA with Express + Vite
 - **Runtime**: Bun (fast JavaScript runtime)
 - **Database**: Drizzle ORM with SQLite
 - **Auth**: Auth.js
@@ -64,55 +64,58 @@ No hidden magic or complex conventions. Built with Vite and Express, everything 
 
 ### ⚡ Straightforward SSR
 
-Simple data preparation → React component rendering:
+Route-based server-side data loading with nested routes and middleware support:
 
 ```js
-export default async function ssrLoader(url, context) {
-  const ssrData = {};
-  const user = context.user;
-  ssrData.user = user;
-
-  if (url === "/post/list") {
-    const list = await getPostList();
-    ssrData.postList = list;
-  }
-
-  return ssrData;
+// src/routes-server.tsx
+{
+  path: "post/list",
+  ssrHandle: async ({ ssrData }) => {
+    ssrData.swrFallback["/post/list"] = await call(getPosts, null);
+  },
 }
 ```
 
-### 🔄 Flexible SSG
+### 🔄 Flexible SSG and ISR
 
-Generate static pages on-demand with manual cache updates:
+Generate static pages automatically with on-demand updates:
 
 ```js
-export function getPostList() {
-  // Fetch data logic
+// src/routes-server.tsx
+{
+  path: "post/:post_id",
+  ssg: true,
+  isr: true,
 }
 
-export function updatePost(id, title, content) {
-  // Update logic
-  ssgUpdate(["/post/list"]);
+// Regenerate static pages after data updates
+function updatePost(id, title, content) {
+  // Update data...
+  updatePageCaches(["/post/list", `/post/${id}`]);
 }
 ```
 
-### 🔗 SPA-Friendly
+### 🔗 Data Management with SWR
 
-Use standard React patterns with browser routing and state management. Handle missing `ssrData` gracefully:
+Use SWR for data fetching with automatic SSR data and client-side caching:
 
 ```jsx
-import { useEffect } from "react";
+import useSWR from "swr";
+import { orpc } from "@/lib/orpc-client";
 
-export default function MyApp() {
-  const [postList, setPostList] = useState(getSsrData()?.postList);
+export default function PostListPage() {
+  const { data: posts, mutate } = useSWR(
+    "/demo/post/list",
+    orpc.demo.post.getPosts
+  );
 
-  useEffect(() => {
-    if (!postList) {
-      getPostList().then(setPostList);
-    }
-  }, [postList]);
-
-  return <PostListComponent postList={postList || []} />;
+  return (
+    <div>
+      {posts?.map((post) => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  );
 }
 ```
 

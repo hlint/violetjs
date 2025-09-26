@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import z from "zod";
 import dbInitialize from "@/db/initialize";
-import ssgInitialize from "@/server/ssg/ssg-initialize";
+import ssgGeneration from "@/server/page-generation/ssg-generation";
 
 export default async function prodInitialize() {
   const markFile = "./runtime/initialize-info.json";
@@ -11,7 +11,7 @@ export default async function prodInitialize() {
     return;
   }
   await dbInitialize();
-  await ssgInitialize();
+  await ssgGeneration();
   await fs.writeJson(markFile, { buildTime });
   console.log("Initialized");
 }

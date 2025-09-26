@@ -18,9 +18,10 @@ msgid "404 Not Found"
 msgstr "404 页面未找到"
 
 #: src/pages/demo/todo/index.tsx:56
-msgid "A simple todo demo with ssr, orpc, swr anddrizzle."
+msgid "A simple todo demo with ssr, orpc, swr and drizzle."
 msgstr "一个使用 ssr、orpc、swr 和 drizzle 的简单待办事项演示。"
 
+#: src/pages/demo/post/list.tsx:133
 #: src/pages/demo/todo/index.tsx:147
 msgid "Add"
 msgstr "添加"
@@ -29,7 +30,7 @@ msgstr "添加"
 msgid "Are you sure you want to sign out?"
 msgstr "您确定要退出登录吗？"
 
-#: src/layouts/app-layout.tsx:70
+#: src/layouts/app-layout.tsx:75
 #: src/pages/demo/auth-required/index.tsx:15
 #: src/pages/demo/auth-required/index.tsx:18
 msgid "Auth Required"
@@ -39,9 +40,26 @@ msgstr "身份认证"
 msgid "Back to Home"
 msgstr "返回首页"
 
+#: src/pages/demo/post/item.tsx:87
+#: src/pages/demo/post/item.tsx:217
+msgid "Back to list"
+msgstr "返回列表"
+
 #: src/components/app/theme/theme-mode-switcher.tsx:43
 msgid "Color Mode"
 msgstr "颜色模式"
+
+#: src/pages/demo/post/item.tsx:103
+msgid "Complex form with react-hook-form and ISR support."
+msgstr "使用 react-hook-form 和 ISR 支持的复杂表单。"
+
+#: src/pages/demo/post/item.tsx:183
+msgid "Content"
+msgstr "内容"
+
+#: src/pages/demo/post/item.tsx:189
+msgid "Content of the post"
+msgstr "文章内容"
 
 #: src/pages/auth/sign-in/index.tsx:29
 msgid "Continue with GitHub"
@@ -51,11 +69,19 @@ msgstr "使用 GitHub 继续"
 msgid "Continue with Google"
 msgstr "使用 Google 继续"
 
+#: src/pages/demo/post/item.tsx:197
+msgid "Created at"
+msgstr "创建时间"
+
+#: src/pages/demo/post/item.tsx:213
+msgid "Delete"
+msgstr "删除"
+
 #: src/layouts/app-layout.tsx:58
 msgid "Demo"
 msgstr "演示"
 
-#: src/layouts/app-layout.tsx:75
+#: src/layouts/app-layout.tsx:80
 #: src/pages/demo/error-handling/index.tsx:23
 #: src/pages/demo/error-handling/index.tsx:26
 msgid "Error Handling"
@@ -78,6 +104,10 @@ msgstr "首页"
 msgid "Install PWA"
 msgstr "安装 PWA"
 
+#: src/pages/demo/post/item.tsx:53
+msgid "Loading..."
+msgstr "加载中..."
+
 #: src/components/app/error-fallback.tsx:9
 msgid "Oops, something went wrong..."
 msgstr "哎呀，出了点问题..."
@@ -90,6 +120,27 @@ msgstr "调色板"
 msgid "Please try again later or click <0>here</0> to reset."
 msgstr "请稍后再试，或点击<0>这里</0>重置。"
 
+#: src/layouts/app-layout.tsx:70
+msgid "Post"
+msgstr "文章"
+
+#: src/pages/demo/post/item.tsx:100
+msgid "Post Detail"
+msgstr "文章详情"
+
+#: src/pages/demo/post/item.tsx:66
+#: src/pages/demo/post/item.tsx:69
+msgid "Post Not Found"
+msgstr "文章未找到"
+
+#: src/pages/demo/post/item.tsx:142
+msgid "Post updated"
+msgstr "文章已更新"
+
+#: src/pages/demo/post/list.tsx:48
+msgid "Posts"
+msgstr "文章列表"
+
 #: src/components/app/theme/theme-palette-modal-switcher.tsx:52
 msgid "Select a palette to use for your application."
 msgstr "选择要用于应用程序的调色板。"
@@ -98,7 +149,11 @@ msgstr "选择要用于应用程序的调色板。"
 msgid "Select palette"
 msgstr "选择调色板"
 
-#: src/layouts/app-layout.tsx:125
+#: src/pages/demo/post/list.tsx:51
+msgid "Showcasing CRUD operations with oRPC APIs and SWR data fetching support."
+msgstr "展示使用 oRPC API 和 SWR 数据获取支持的 CRUD 操作。"
+
+#: src/layouts/app-layout.tsx:130
 #: src/pages/auth/sign-in/index.tsx:16
 msgid "Sign In"
 msgstr "登录"
@@ -107,19 +162,23 @@ msgstr "登录"
 msgid "Sign in to your account to continue."
 msgstr "登录您的账户以继续。"
 
-#: src/layouts/app-layout.tsx:117
+#: src/layouts/app-layout.tsx:122
 #: src/pages/auth/sign-out/index.tsx:15
 #: src/pages/auth/sign-out/index.tsx:25
 msgid "Sign Out"
 msgstr "登出"
 
-#: src/layouts/app-layout.tsx:112
+#: src/layouts/app-layout.tsx:117
 msgid "Switch Account"
 msgstr "切换账号"
 
 #: src/pages/404/index.tsx:11
 msgid "The page you are looking for does not exist. Please try again later or click <0>here</0> to go back to the home page."
 msgstr "您要查找的页面不存在。请稍后再试，或点击<0>这里</0>返回首页。"
+
+#: src/pages/demo/post/item.tsx:84
+msgid "The post you are looking for does not exist."
+msgstr "您要查找的文章不存在。"
 
 #: src/pages/demo/auth-required/index.tsx:21
 msgid "This page is protected by auth guard"
@@ -138,11 +197,24 @@ msgstr "抛出回调错误"
 msgid "Throw a render error"
 msgstr "抛出渲染错误"
 
+#: src/pages/demo/post/item.tsx:164
+msgid "Title"
+msgstr "标题"
+
+#: src/pages/demo/post/item.tsx:170
+msgid "Title of the post"
+msgstr "文章标题"
+
 #: src/layouts/app-layout.tsx:65
+#: src/pages/demo/post/list.tsx:45
 #: src/pages/demo/todo/index.tsx:50
 #: src/pages/demo/todo/index.tsx:53
 msgid "Todo"
 msgstr "待办事项"
+
+#: src/pages/demo/post/item.tsx:206
+msgid "Update"
+msgstr "更新"
 
 #: src/pages/demo/auth-required/index.tsx:26
 msgid "You are <0>logged in</0>."
